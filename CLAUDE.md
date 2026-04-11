@@ -130,10 +130,10 @@
 
 ## 共用設定
 
-### 參考過去的解題紀錄
-學生之前在 NeetCode 上的提交紀錄在：
-`../neetcode-submissions/Data Structures & Algorithms/{problem-slug}/`
-可以參考但不要直接搬過來用。
+### 參考資料
+- **過去提交紀錄**：`../neetcode-submissions/Data Structures & Algorithms/{problem-slug}/`
+- **弱項分析報告**：`./ANALYSIS.md` — 包含掙扎題目、code quality 問題、主題掌握度、練習建議
+- 出題和給提示時，優先參考 ANALYSIS.md 中的弱項和建議
 
 ### 解題檔案模板
 ```python
