@@ -133,6 +133,17 @@
 
 ## 共用設定
 
+### 紀錄資料夾
+- **讀書計畫紀錄**：`./study/plan_01_2026-04-11.md`, ...
+  - 檔名格式：`plan_{nn}_{YYYY-MM-DD}.md`
+  - 每次 `/study` 生成計畫後，將計畫內容存入
+  - 每題完成後更新該檔案的結果欄位（✅/⚠️/❌、花費時間、筆記）
+  - 計畫全部完成後，同步摘要到 `ANALYSIS.md` 的「讀書計畫紀錄」
+- **模擬面試紀錄**：`./mock/mock_01_2026-04-11.md`, ...
+  - 檔名格式：`mock_{nn}_{YYYY-MM-DD}.md`
+  - 每次 `/mock` 結束後，將完整面試流程和回饋存入
+  - 包含：題目、面試過程摘要、學生 code、評分回饋、改進建議
+
 ### 參考資料
 - **過去提交紀錄**：`../neetcode-submissions/Data Structures & Algorithms/{problem-slug}/`
 - **弱項分析報告**：`./ANALYSIS.md` — 包含掙扎題目、code quality 問題、主題掌握度、練習建議
