@@ -7,7 +7,7 @@
 
 | 指令 | 模式 |
 |------|------|
-| `/plan` 或 `/plan {topic}` | 生成 5 題讀書計畫 |
+| `/study` 或 `/study {topic}` | 生成 5 題讀書計畫 |
 | `/mock` 或 `/mock {topic}` | 45 分鐘模擬面試 |
 | `/practice {problem}` | 助教引導練習 |
 

@@ -1,5 +1,5 @@
 ---
-name: plan
+name: study
 description: Generate a 5-problem study plan based on weakness analysis
 user_invocable: true
 ---
