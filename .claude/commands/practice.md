@@ -67,8 +67,13 @@ Pre-fill the docstring (number, title, difficulty, tags, URL) and the `if __name
    - Level 4: Explain core logic with pseudocode or small examples
    - Level 5: Only show the full solution if the student explicitly asks
 3. Student writes code locally; run `python {file}` to test
-4. Verify tests pass, then remind student to fill in `思路` and `複雜度`
-5. Student submits on NeetCode when ready
+4. Tests pass 後，**主動分析優化空間**再讓學生繼續：
+   - 時間/空間複雜度能不能更好？
+   - 有沒有更乾淨的寫法或更適合面試的表達？
+   - 有沒有概念上的理解缺口值得深挖？（如果有，記到 `notes/`）
+   - 用提問引導學生自己發現，不要直接給答案
+5. Verify student filled in `思路` and `複雜度`
+6. Student submits on NeetCode when ready
 
 ## After Solving
 
