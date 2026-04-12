@@ -1,7 +1,7 @@
 # Google SWE 考古題題單
 
-> 來源：LeetCode Company Tags、Blind/TeamBlind 面試回報、NeetCode Roadmap、Grind 75
-> 更新日期：2026-04-13
+> 來源：LeetCode Company Tags、Blind/TeamBlind 面試回報、NeetCode Roadmap、Grind 75、HackMNC 頻率數據
+> 更新日期：2026-04-13（已交叉驗證）
 > 頻率標記：🔥🔥🔥 = 極高頻 / 🔥🔥 = 高頻 / 🔥 = 常見
 
 ---
@@ -39,10 +39,10 @@
 | 68 | Text Justification | H | 🔥🔥🔥 |
 | 76 | Minimum Window Substring | H | 🔥🔥🔥 |
 | 394 | Decode String | M | 🔥🔥🔥 |
-| 681 | Next Closest Time | M | 🔥🔥🔥 |
-| 809 | Expressive Words | M | 🔥🔥🔥 |
 | 844 | Backspace String Compare | E | 🔥🔥🔥 |
-| 929 | Unique Email Addresses | E | 🔥🔥🔥 |
+| 681 | Next Closest Time | M | 🔥（2018-2020 高頻，近年少見） |
+| 809 | Expressive Words | M | 🔥（2018-2020 高頻，近年少見） |
+| 929 | Unique Email Addresses | E | 🔥（太簡單，L4 不太會考） |
 | 5 | Longest Palindromic Substring | M | 🔥🔥 |
 | 10 | Regular Expression Matching | H | 🔥🔥 |
 | 17 | Letter Combinations of a Phone Number | M | 🔥🔥 |
@@ -63,7 +63,7 @@
 | 15 | 3Sum | M | 🔥🔥🔥 |
 | 239 | Sliding Window Maximum | H | 🔥🔥🔥 |
 | 283 | Move Zeroes | E | 🔥🔥🔥 |
-| 11 | Container With Most Water | M | 🔥🔥 |
+| 11 | Container With Most Water | M | 🔥🔥🔥 |
 | 209 | Minimum Size Subarray Sum | M | 🔥🔥 |
 | 424 | Longest Repeating Character Replacement | M | 🔥🔥 |
 | 567 | Permutation in String | M | 🔥🔥 |
@@ -75,6 +75,7 @@
 
 | # | 題目 | 難度 | 頻率 |
 |---|------|------|------|
+| 4 | Median of Two Sorted Arrays | H | 🔥🔥🔥 |
 | 33 | Search in Rotated Sorted Array | M | 🔥🔥🔥 |
 | 162 | Find Peak Element | M | 🔥🔥🔥 |
 | 528 | Random Pick with Weight | M | 🔥🔥🔥 |
@@ -279,8 +280,11 @@
 
 ## 🎯 最高優先未完成題目（🔥🔥🔥 且未做過）
 
+> 已於 2026-04-13 交叉驗證（來源：HackMNC 頻率數據、LeetCode Wizard、Verve Top 30、LeetCode Discuss 2024-2025 面試回報）
+
 | # | 題目 | 主題 | 難度 |
 |---|------|------|------|
+| 4 | Median of Two Sorted Arrays | Binary Search | H |
 | 68 | Text Justification | String | H |
 | 127 | Word Ladder | Graph/BFS | H |
 | 162 | Find Peak Element | Binary Search | M |
@@ -293,12 +297,9 @@
 | 528 | Random Pick with Weight | Binary Search | M |
 | 588 | Design In-Memory File System | Design | H |
 | 642 | Design Search Autocomplete System | Trie/Design | H |
-| 681 | Next Closest Time | String | M |
 | 721 | Accounts Merge | Union Find | M |
-| 809 | Expressive Words | String | M |
 | 844 | Backspace String Compare | String/Stack | E |
 | 863 | All Nodes Distance K in Binary Tree | Tree/Graph | M |
-| 929 | Unique Email Addresses | String | E |
 | 938 | Range Sum of BST | Tree | E |
 | 951 | Flip Equivalent Binary Trees | Tree | M |
 | 1146 | Snapshot Array | Design | M |
