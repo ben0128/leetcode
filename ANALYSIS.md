@@ -128,6 +128,18 @@
 
 ## 六、讀書計畫紀錄
 
-> 每完成一份 5 題讀書計畫後，紀錄在此。用 `/plan` 生成新計畫。
+> 每完成一份 5 題讀書計畫後，紀錄在此。用 `/study` 生成新計畫。
 
-（尚無紀錄）
+### Plan #1 — 2026-04-11
+主題重點：Union Find 肌肉記憶、2D DP 入門、Monotonic Queue 補缺口
+
+| # | 題目 | 結果 | 花費時間 | 筆記 |
+|---|------|------|----------|------|
+| 1 | 230. Kth Smallest in BST | ⚠️ | — | recursive 能寫但不熟 iterative inorder，學了 stack 模板後重寫成功 |
+| 2 | 547. Number of Provinces | ✅ | — | UF with path compression + union by rank，搞清楚 rank 語意 |
+| 3 | 97. Interleaving String | ⚠️ | — | 第一次做 2D DP，需引導才能起頭，但 space 優化 O(n) 自己完成 |
+| 4 | 295. Find Median from Data Stream | ✅ | ~15 min | two-heap pattern，幾乎不需要提示 |
+| 5 | 239. Sliding Window Maximum | ⚠️ | ~20 min | 第一次接觸 monotonic queue，思路正確但有兩個實作 bug |
+
+**整體觀察：** 熟悉的主題（BST、Heap）表現好且快。新概念（iterative inorder、2D DP、monotonic queue）需要引導才能起步，但理解後能自己寫出來。複雜度分析容易出錯（寫錯 O(log n) 和 O(n)），需要養成寫 code 前先講複雜度的習慣。
+**下次建議加強：** 2D DP 再練 1-2 題鞏固（Edit Distance、LCS）、Monotonic Queue/Stack 再練一題、開始做限時 mock 測試面試壓力下的表現
