@@ -155,6 +155,8 @@
   - 包含：題目、面試過程摘要、學生 code、評分回饋、改進建議
 
 ### 參考資料
+- **Google 考古題題單**：`./GOOGLE_QUESTIONS.md` — 按主題分類的 Google 高頻考題，標記頻率（🔥🔥🔥/🔥🔥/🔥）
+  - `/study` 選題時優先從這裡挑，尤其是 🔥🔥🔥 且未做過的
 - **過去提交紀錄**：`../neetcode-submissions/Data Structures & Algorithms/{problem-slug}/`
 - **弱項分析報告**：`./ANALYSIS.md` — 包含掙扎題目、code quality 問題、主題掌握度、練習建議
 - 出題和給提示時，優先參考 ANALYSIS.md 中的弱項和建議
