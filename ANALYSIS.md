@@ -122,6 +122,14 @@
 | Segment Tree / BIT | 低但偶有 |
 | Math | 低 |
 
+#### 🔴 特別標記：Nested Parsing Stack Pattern（2026-04-18 新增）
+
+- **卡點**：394 Decode String 重度卡關。根本問題是**無法 visualize 嵌套處理**（試圖同時想所有層）
+- **心智模型**：stack = 手動管 call stack；每次只想「當前一層」的進入/處理/離開
+- **相關題**：394、726、227、224、636、1096（全都是同一個 pattern）
+- **筆記**：`notes/nested_parsing_stack.md`
+- **下次 /study 優先納入**：227 Basic Calculator II（同 pattern 再練一題，鞏固模型）
+
 ---
 
 ## 四、語言轉換觀察

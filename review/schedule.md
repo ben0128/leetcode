@@ -20,6 +20,7 @@
 | 239 | Sliding Window Maximum | H | Monotonic Queue | 2026-04-13 | ⚠️ | 2d | 2026-04-15 | 首次 monotonic queue，有兩個實作 bug |
 | 64 | Minimum Path Sum | M | 2D DP | 2026-04-18 | ⚠️ | 2d | 2026-04-20 | 1D 滾動實作對但講不出「為什麼 work」；dp 定義/邊界/轉移需引導精準 |
 | 236 | LCA of Binary Tree | M | Tree / Recursion | 2026-04-18 | ⚠️ | 2d | 2026-04-20 | 第一版 code 漏遞迴右子樹；post-order 與 inorder 措辭混淆；follow-up LL intersection 方向錯 |
+| 394 | Decode String | M | Stack / Nested Parsing | 2026-04-18 | ⚠️⚠️ | 2d | 2026-04-20 | **重度卡關（高優先重練）**。無法 visualize 嵌套處理；iterative 版 `[` push 丟失外層 char、`]` pop 不用 popC。心智模型：stack = 函式呼叫 stack 的手動版；每次只想一層 |
 
 ## Mastered（通過 32d 複習後結業）
 
