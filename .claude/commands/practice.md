@@ -17,14 +17,18 @@ If no problem is specified, ask the user which problem they'd like to practice.
    - If yes, read the latest submission, mention it, and ask: try a different approach, or re-solve from scratch?
 3. Check if this practice is part of an active study plan by reading the latest file in `./study/`
    - If the problem matches one in the plan, note it — you'll update the plan progress when done
-4. **快速複習**：如果 `./notes/` 裡有跟這題相關的筆記（例如做 BST 題時有 iterative_inorder.md），抽問 1-2 個「複習時問自己」的問題，確認上次學的還記得
-5. Create the solution file using the template below
-6. **記錄開始時間**：`**開始時間：{HH:MM}**`
+4. Check `./review/schedule.md` Active table — is this problem listed there?
+   - If yes → this is a **SR revisit**. Remind student:
+     > 「這題在 SR schedule 上，是間隔重複複習。請**從零開始**解，不要回看舊解法；複習時間目標更嚴：Medium < 15 min, Hard < 25 min。」
+   - Note the current stage (2d/7d/16d/32d) — you'll update it per Update Protocol when done
+5. **快速複習**：如果 `./notes/` 裡有跟這題相關的筆記（例如做 BST 題時有 iterative_inorder.md），抽問 1-2 個「複習時問自己」的問題，確認上次學的還記得
+6. Create the solution file using the template below
+7. **記錄開始時間**：`**開始時間：{HH:MM}**`
 
 ### Solution File Template
 
 - **Filename**: `{number}_{snake_case_title}.py` (e.g., `0547_number_of_provinces.py`)
-- **Location**: `easy/`, `medium/`, or `hard/` based on difficulty
+- **Location**: `solutions/` (difficulty recorded in the file's docstring, not the folder)
 
 ```python
 """
@@ -104,4 +108,14 @@ Pre-fill the docstring (number, title, difficulty, tags, URL) and the `if __name
   - Result: ✅ (solved optimally without help) / ⚠️ (needed hints or suboptimal) / ❌ (could not solve)
   - Time spent (actual minutes)
   - Notes (what they struggled with or learned)
+- Update `./review/schedule.md` (see the Update Protocol and 排程納入規則 in that file):
+  - **SR revisit**（Setup step 4 中辨識為 Active 中的原題）：依結果更新該列 — ✅ 進下一階段 / ⚠️ 維持階段 / ❌ 重置 2d；32d ✅ 通過 → 移到 Mastered
+  - **新題**：符合排程納入規則（⚠️/❌/Hard ✅/新主題 ✅）→ append 到 Active，階段=2d，下次日期=今天+2
+  - 熟練主題的 Medium ✅ → 不排程
+- Update `./ANALYSIS.md` 主題熟練度總表（依該檔的「等級判定規則」）：
+  - 「已解題數」+1
+  - 「最近 2 題」欄位左移（舊的結果移出、本次結果填入右側）
+  - 若此主題尚不在表中 → 新增一列，「已解題數」= 1
+  - 重算該列的「等級」欄（gap → weak → developing → proficient）
+  - 若 SR schedule 記錄了此題，同步更新「SR 最高階段」欄位
 - Ask the student if they want to continue to the next problem in the plan

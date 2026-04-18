@@ -62,36 +62,65 @@
 
 ## 三、各主題掌握度評估
 
-### 強項（可以自信面對）
+### 主題熟練度總表（量化判定）
 
-| 主題 | 題數 | 評估 |
-|------|------|------|
-| Array / Hashing | 30 | 大量練習，基本功扎實 |
-| Two Pointers | 8 | 雖然掙扎多但最終解法都 optimal |
-| Stack / Monotonic Stack | 8+ | daily-temperatures、largest-rectangle 都正確 |
-| Binary Search | 8+ | 覆蓋完整 |
-| Trees | 18+ | BFS/DFS/Inorder 模式穩定 |
-| Backtracking | 12+ | 非常全面，subsets/permutations/combinations 全系列 |
-| Graph BFS/DFS | 14+ | 基本 BFS/DFS 沒問題 |
+> **規則主導**：等級由下方「判定規則」自動計算，不靠主觀描述
+> **由誰維護**：`/practice` 完成題目後增量更新（題數 +1、最近 2 題左移）；`/study` 開始時校正全表
+> **被誰使用**：`/study` 選題時依 `等級` 欄直接挑 weak/gap 主題，不再從敘述文字推斷
 
-### 弱項（需要重點加強）
+| 主題 | 已解題數 | 最近 2 題 | SR 最高階段 | 等級 | 備註 |
+|------|---------|----------|-----------|-----|------|
+| Array / Hashing | 30+ | ✅✅ | — | proficient | 基本功扎實；歷史 anagram/sudoku 有掙扎但已鞏固 |
+| Two Pointers | 8 | ✅✅ | — | proficient | 歷史 three-sum / palindrome 早期掙扎，最終 optimal |
+| Stack / Monotonic Stack | 8+ | ✅✅ | — | proficient | daily-temperatures、largest-rectangle 穩定 |
+| Binary Search | 8+ | ✅✅ | — | proficient | 覆蓋完整 |
+| Trees (general) | 18+ | ⚠️⚠️ | 2d | **weak** | iterative inorder 首次接觸（94 ⚠️） |
+| BST | 3 | ⚠️✅ | 2d | **weak** | 230 Kth ⚠️；歷史 LCA 沒用 BST 性質 O(h) |
+| Backtracking | 12+ | ✅✅ | — | proficient | subsets/permutations/combinations 全覆蓋 |
+| Graph BFS/DFS | 14+ | ✅✅ | — | proficient | — |
+| Union Find | 2 | ⚠️✅ | 2d | **weak** | 題數<3；count-connected 歷史 11 次；547 ✅ 剛鞏固 |
+| DP (1D) | 5 | ⚠️— | — | **weak** | house-robber 8 次，直覺未自動化 |
+| DP (2D) | 1 | ⚠️— | 2d | **weak** | 題數<3；97 首次接觸需引導 |
+| DP (Knapsack) | 2 | ⚠️— | — | **weak** | 題數<3；partition-equal-subset-sum 5 次 |
+| Heap | 3+ | ✅⚠️ | 2d | **weak** | top-k / kth-largest 早期 5-6 次；295 最近 ✅ |
+| Monotonic Queue | 1 | ⚠️— | 2d | **weak** | 題數<3；239 首次接觸有 2 個實作 bug |
+| Segment Tree / BIT | 0 | — | — | **gap** | 零覆蓋 |
+| 進階 Design | 0 | — | — | **gap** | LFU / Iterator / Rate Limiter 未練 |
+| Math | 0 | — | — | **gap** | 幾乎零覆蓋 |
 
-| 主題 | 問題 | 建議 |
-|------|------|------|
-| **Dynamic Programming** | house-robber 花 8 次、partition-equal-subset-sum 花 5 次。DP 直覺不夠自動化 | 重點練 2D DP、Knapsack 變體、State Machine DP |
-| **Union Find** | count-connected-components 花 11 次，是最大掙扎點 | 把 UF template 練到肌肉記憶，再做 3-5 題 UF |
-| **BST 特性應用** | LCA 沒用 BST 性質 | 刻意練習利用 BST ordering 的題目 |
-| **Heap 信心** | 基本 heap 題要 5-6 次 | 已改善但需要鞏固，建議練 merge k sorted |
+### 等級判定規則
 
-### 缺口（完全沒練或極少）
+依序檢查，第一個符合的生效：
 
-| 主題 | 缺少的重要題目 | Google 出題頻率 |
-|------|---------------|----------------|
-| **Monotonic Queue** | sliding-window-maximum | 高 |
-| **進階 DP** | distinct-subsequences, burst-balloons, regular-expression-matching, interleaving-strings | 中高 |
-| **Segment Tree / BIT** | 零覆蓋 | 低但偶爾出現 |
-| **進階 Design** | Iterator, Rate Limiter, LFU Cache | 中 |
-| **Math** | 幾乎零覆蓋 | 低 |
+1. **gap**：已解題數 = 0
+2. **weak**：以下任一成立
+   - 已解題數 < 3（尚未鞏固）
+   - 最近 2 題結果中有 ⚠️ 或 ❌
+3. **proficient**：以下全部成立
+   - 已解題數 ≥ 5
+   - 最近 2 題結果皆為 ✅
+4. **developing**：上述皆非（已脫離 weak，尚未達 proficient）
+
+> 「最近 2 題」指該主題最新完成的兩題（依完成時間序），不是全域最近兩題。`—` 表示該主題題數不足 2。
+
+### 質性分析（補充說明，不影響等級判定）
+
+#### 歷史弱點脈絡
+| 主題 | 歷史訊號 | 方向 |
+|------|---------|------|
+| DP | house-robber 8 次、partition-equal-subset-sum 5 次 | 2D DP、Knapsack 變體、State Machine DP |
+| Union Find | count-connected-components 11 次，最大掙扎點 | UF template 肌肉記憶化 |
+| BST 特性 | 舊 LCA 用通用 BT O(n) 而非 O(h) | 刻意練習利用 BST ordering |
+| Heap | 基本 heap 題早期 5-6 次 | 已改善，鞏固中 |
+
+#### Gap 對應的 Google 出題頻率
+| 主題 | Google 頻率 |
+|------|------------|
+| Monotonic Queue | 高 |
+| 進階 DP（distinct-subsequences、burst-balloons、regex-matching） | 中高 |
+| 進階 Design | 中 |
+| Segment Tree / BIT | 低但偶有 |
+| Math | 低 |
 
 ---
 

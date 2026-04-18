@@ -5,9 +5,7 @@ My LeetCode practice solutions in Python.
 ## Structure
 
 ```
-easy/       # Easy problems
-medium/     # Medium problems
-hard/       # Hard problems
+solutions/  # All problems (difficulty noted in each file's docstring)
 ```
 
 ## Naming Convention

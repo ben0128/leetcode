@@ -153,6 +153,10 @@
   - 檔名格式：`mock_{nn}_{YYYY-MM-DD}.md`
   - 每次 `/mock` 結束後，將完整面試流程和回饋存入
   - 包含：題目、面試過程摘要、學生 code、評分回饋、改進建議
+- **間隔重複排程**：`./review/schedule.md`
+  - 紀錄已做過題目的 SR 複習排程（2d / 7d / 16d / 32d → mastered）
+  - 由 `/study` 和 `/practice` 自動維護（見該檔內的 Update Protocol 和排程納入規則）
+  - `/study` 的「1 題 review」槽位優先從此檔的 Active due 項目抽取
 
 ### 參考資料
 - **Google 考古題題單**：`./GOOGLE_QUESTIONS.md` — 按主題分類的 Google 高頻考題，標記頻率（🔥🔥🔥/🔥🔥/🔥）
@@ -196,4 +200,4 @@ if __name__ == "__main__":
 ### 檔案命名
 - 格式：`{number}_{snake_case_title}.py`
 - 例如：`0001_two_sum.py`
-- 放在對應難度資料夾：`easy/`, `medium/`, `hard/`
+- 統一放在 `solutions/`（難度資訊寫在檔案 docstring 的 `Difficulty:` 欄位）
