@@ -72,15 +72,15 @@
 |------|---------|----------|-----------|-----|------|
 | Array / Hashing | 30+ | ✅✅ | — | proficient | 基本功扎實；歷史 anagram/sudoku 有掙扎但已鞏固 |
 | Two Pointers | 8 | ✅✅ | — | proficient | 歷史 three-sum / palindrome 早期掙扎，最終 optimal |
-| Stack / Monotonic Stack | 8+ | ✅✅ | — | proficient | daily-temperatures、largest-rectangle 穩定 |
+| Stack / Monotonic Stack | 9+ | ⚠️⚠️ | 2d | **weak** | 394 Decode String 重度卡關（⚠️⚠️），嵌套 parsing mental model 未建立 |
 | Binary Search | 8+ | ✅✅ | — | proficient | 覆蓋完整 |
-| Trees (general) | 18+ | ⚠️⚠️ | 2d | **weak** | iterative inorder 首次接觸（94 ⚠️） |
+| Trees (general) | 19+ | ⚠️⚠️ | 2d | **weak** | 236 LCA ⚠️（第一版漏遞迴右子樹）；94 ⚠️ |
 | BST | 3 | ⚠️✅ | 2d | **weak** | 230 Kth ⚠️；歷史 LCA 沒用 BST 性質 O(h) |
 | Backtracking | 12+ | ✅✅ | — | proficient | subsets/permutations/combinations 全覆蓋 |
 | Graph BFS/DFS | 14+ | ✅✅ | — | proficient | — |
 | Union Find | 2 | ⚠️✅ | 2d | **weak** | 題數<3；count-connected 歷史 11 次；547 ✅ 剛鞏固 |
 | DP (1D) | 5 | ⚠️— | — | **weak** | house-robber 8 次，直覺未自動化 |
-| DP (2D) | 1 | ⚠️— | 2d | **weak** | 題數<3；97 首次接觸需引導 |
+| DP (2D) | 2 | ⚠️⚠️ | 2d | **weak** | 64 ⚠️ 實作對但講不出「為什麼 1D work」；97 ⚠️ 邊界需引導 |
 | DP (Knapsack) | 2 | ⚠️— | — | **weak** | 題數<3；partition-equal-subset-sum 5 次 |
 | Heap | 3+ | ✅⚠️ | 2d | **weak** | top-k / kth-largest 早期 5-6 次；295 最近 ✅ |
 | Monotonic Queue | 1 | ⚠️— | 2d | **weak** | 題數<3；239 首次接觸有 2 個實作 bug |
@@ -166,6 +166,32 @@
 ## 六、讀書計畫紀錄
 
 > 每完成一份 5 題讀書計畫後，紀錄在此。用 `/study` 生成新計畫。
+
+### Plan #2 — 2026-04-18 ~ 2026-04-21
+主題重點：Tree/BST 對比學習、Stack 字串處理、2D DP 鞏固、Graph BFS 進階
+
+| # | 題目 | 結果 | 花費時間 | 筆記 |
+|---|------|------|----------|------|
+| 1 | 64. Minimum Path Sum | ⚠️ | — | 1D 滾動實作對但講不出「為什麼 work」；dp 定義/邊界/轉移需多次引導；follow-up path reconstruction 方向 ok |
+| 2 | 236. LCA of Binary Tree | ⚠️ | — | 核心 insight「左右都找到→root；只一邊→回傳那邊」對，但第一版漏遞迴右子樹；post-order 與 inorder 措辭混淆；follow-up parent pointer 誤答為 cycle detector |
+| 3 | 394. Decode String | ⚠️⚠️ | — | **重度卡關**。無法 visualize 嵌套處理；iterative 版 `[` push 丟失外層 char、`]` pop 錯推 char。新增 `notes/nested_parsing_stack.md`。下次 /study 納入 227 Basic Calculator II |
+| 4 | 235. LCA of BST (SR) | ⚠️ | ~10 min | iterative O(1) 概念需引導（先前只熟 recursive O(h)）；small/big normalize 寫法聰明；複雜度措辭 O(n) 應為 O(h)；殘留註解舊版未清 |
+| 5 | 127. Word Ladder | ⚠️ | — | 首次 Hard BFS。需 BFS/wildcard 兩個提示起步，主架構一次過。複雜度寫 O(M·N) 應為 O(M·N²)。Visited 次優（pop 時 check 而非 enqueue 時 mark）。Bidirectional BFS follow-up 部分正確但誤答記憶體方向 + 漏 "expand smaller frontier" |
+
+**整體觀察：**
+- 5 題全部 ⚠️，其中 394 ⚠️⚠️（雙警示）。這份計畫**每題都有需引導點**，顯示挑戰度拉對了
+- **共通 root cause**：**複雜度分析不精準**（64 講不出 dp[j] 對應關係、235 寫 O(n) 而非 O(h)、127 漏算 slice cost）。需要**在寫 code 前就口述精準複雜度**的習慣
+- **Stack 主題從 proficient 掉回 weak**（394 重度卡關），nested parsing mental model 不穩
+- **New 心智模型建立**：`notes/nested_parsing_stack.md`（抽屜+桌面類比），下次相似題測驗是否內化
+- Follow-up 表現偏弱（236 parent pointer、127 bidirectional BFS）— 建議加強變體思考訓練
+
+**下次建議加強：**
+- 227 Basic Calculator II（同 394 pattern 鞏固）
+- 721 Accounts Merge（UF 多題鞏固）
+- 複雜度寫之前「先列出所有成本來源」的習慣（含 slice、key 儲存等容易忽略的）
+- 開始限時 mock（Plan #2 無時間紀錄，說明平時練習沒測時間壓力）
+
+---
 
 ### Plan #1 — 2026-04-11
 主題重點：Union Find 肌肉記憶、2D DP 入門、Monotonic Queue 補缺口

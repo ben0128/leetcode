@@ -13,7 +13,7 @@
 |---|------|------|------|----------|----------|----------|----------|------|
 | 94 | Binary Tree Inorder Traversal | M | Tree / Stack | 2026-04-12 | ⚠️ | 2d | 2026-04-14 | iterative inorder 首次 |
 | 230 | Kth Smallest Element in BST | M | Tree / BST | 2026-04-12 | ⚠️ | 2d | 2026-04-14 | iterative inorder 應用 |
-| 235 | Lowest Common Ancestor of BST | M | Tree / BST | 2026-04-11 | ✅ | 2d | 2026-04-13 | 修正舊解，改用 BST 性質 O(h) |
+| 235 | Lowest Common Ancestor of BST | M | Tree / BST | 2026-04-11 | ✅ | 2d | 2026-04-22 | 2026-04-20 複習 ⚠️（需引導 iterative O(1) space；複雜度措辭 O(n) 應為 O(h)）→ 維持 2d |
 | 547 | Number of Provinces | M | Union Find | 2026-04-12 | ✅ | 2d | 2026-04-14 | UF template + path compression + rank |
 | 97 | Interleaving String | M | 2D DP | 2026-04-13 | ⚠️ | 2d | 2026-04-15 | 第一次 2D DP，邊界需引導 |
 | 295 | Find Median from Data Stream | H | Heap | 2026-04-13 | ✅ | 2d | 2026-04-15 | two-heap pattern |
@@ -21,6 +21,7 @@
 | 64 | Minimum Path Sum | M | 2D DP | 2026-04-18 | ⚠️ | 2d | 2026-04-20 | 1D 滾動實作對但講不出「為什麼 work」；dp 定義/邊界/轉移需引導精準 |
 | 236 | LCA of Binary Tree | M | Tree / Recursion | 2026-04-18 | ⚠️ | 2d | 2026-04-20 | 第一版 code 漏遞迴右子樹；post-order 與 inorder 措辭混淆；follow-up LL intersection 方向錯 |
 | 394 | Decode String | M | Stack / Nested Parsing | 2026-04-18 | ⚠️⚠️ | 2d | 2026-04-20 | **重度卡關（高優先重練）**。無法 visualize 嵌套處理；iterative 版 `[` push 丟失外層 char、`]` pop 不用 popC。心智模型：stack = 函式呼叫 stack 的手動版；每次只想一層 |
+| 127 | Word Ladder | H | Graph / BFS | 2026-04-21 | ⚠️ | 2d | 2026-04-23 | 首次 Hard BFS。主架構一次過，但需 BFS/wildcard 兩個提示起步。複雜度錯寫 O(M·N) 應為 O(M·N²)（漏算 slice 與 key 長度）。Visited 次優（pop 時 check 而非 enqueue 時）。Follow-up bidirectional BFS 誤認為「記憶體更多」+ 漏掉 "expand smaller frontier" |
 
 ## Mastered（通過 32d 複習後結業）
 
