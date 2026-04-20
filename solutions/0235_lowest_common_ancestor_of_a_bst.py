@@ -10,8 +10,8 @@ URL: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tre
 2. If not, use the features of the BST to find the better route.
 
 複雜度：
-    Time: O(log(n)) 
-    Space: O(h) h = tree height
+    Time: O(n) 最差是skewed tree
+    Space: O(1)
 """
 
 
@@ -27,17 +27,30 @@ class Solution:
         small, big = p.val, q.val
         if small > big:
             small, big = big, small
-        def lca(node):
-            if small <= node.val <= big:
+        
+        node = root
+        while node:
+            v = node.val
+            if small <= v <= big:
                 return node
+            elif v > big: # root 比兩個點都大 => 往左
+                node = node.left
+            else: # root 比兩個點都大 => 往左
+                node = node.right
+
+        # small, big = p.val, q.val
+        # if small > big:
+        #     small, big = big, small
+        # def lca(node):
+        #     if small <= node.val <= big:
+        #         return node
             
-            if node.val > big:
-                return lca(node.left)
-            if node.val < small:
-                return lca(node.right)
+        #     if node.val > big:
+        #         return lca(node.left)
+        #     if node.val < small:
+        #         return lca(node.right)
 
-        return lca(root)
-
+        # return lca(root)
 
 if __name__ == "__main__":
     # Helper to build tree from list
