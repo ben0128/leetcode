@@ -77,7 +77,7 @@
 | Trees (general) | 19+ | ⚠️⚠️ | 2d | **weak** | 236 LCA ⚠️（第一版漏遞迴右子樹）；94 ⚠️ |
 | BST | 3 | ⚠️✅ | 2d | **weak** | 230 Kth ⚠️；歷史 LCA 沒用 BST 性質 O(h) |
 | Backtracking | 12+ | ✅✅ | — | proficient | subsets/permutations/combinations 全覆蓋 |
-| Graph BFS/DFS | 14+ | ✅✅ | — | proficient | — |
+| Graph BFS/DFS | 15+ | ⚠️✅ | 2d | **weak** | 127 首次 Hard BFS ⚠️（BFS/wildcard 提示 + 複雜度漏算 slice cost）；14+ 題基礎仍在 |
 | Union Find | 2 | ⚠️✅ | 2d | **weak** | 題數<3；count-connected 歷史 11 次；547 ✅ 剛鞏固 |
 | DP (1D) | 5 | ⚠️— | — | **weak** | house-robber 8 次，直覺未自動化 |
 | DP (2D) | 2 | ⚠️⚠️ | 2d | **weak** | 64 ⚠️ 實作對但講不出「為什麼 1D work」；97 ⚠️ 邊界需引導 |
