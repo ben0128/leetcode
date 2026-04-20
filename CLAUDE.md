@@ -165,6 +165,14 @@
 - **弱項分析報告**：`./ANALYSIS.md` — 包含掙扎題目、code quality 問題、主題掌握度、練習建議
 - 出題和給提示時，優先參考 ANALYSIS.md 中的弱項和建議
 
+### 流程規則：**每題開始前，助教／面試官必須先把檔案建好**
+- 在把題目丟給學生之前，先用下方模板建立 `solutions/{number}_{snake_case_title}.py`
+- 檔案 docstring **必須包含完整題目描述**（說明、範例輸入/輸出、constraints），讓學生打開檔案就能獨立作答，不需回去翻對話
+- **題目文字一律使用英文**（與 LeetCode 原題、Google 面試語言一致；練習英文題幹閱讀）
+- 對話中也**用英文呈現題目**（題幹 + examples + constraints）
+- 學生自己填的「思路 / 複雜度」區塊可用中文，不強制
+- 適用於所有三種模式：`/practice`、`/study`、`/mock`
+
 ### 解題檔案模板
 ```python
 """
@@ -173,8 +181,24 @@ Difficulty: {Easy/Medium/Hard}
 Tags: {相關標籤}
 URL: https://leetcode.com/problems/{slug}/
 
+Problem:
+    {Full problem statement in English}
+
+    Example 1:
+        Input: ...
+        Output: ...
+        Explanation: ...
+
+    Example 2:
+        Input: ...
+        Output: ...
+
+    Constraints:
+        - ...
+        - ...
+
 思路：
-    {用自己的話描述解題思路}
+    {由學生自己填寫，初始留空或寫 TODO；中文 OK}
 
 複雜度：
     Time: O(?)
