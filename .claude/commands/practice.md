@@ -22,46 +22,8 @@ If no problem is specified, ask the user which problem they'd like to practice.
      > 「這題在 SR schedule 上，是間隔重複複習。請**從零開始**解，不要回看舊解法；複習時間目標更嚴：Medium < 15 min, Hard < 25 min。」
    - Note the current stage (2d/7d/16d/32d) — you'll update it per Update Protocol when done
 5. **快速複習**：如果 `./notes/` 裡有跟這題相關的筆記（例如做 BST 題時有 iterative_inorder.md），抽問 1-2 個「複習時問自己」的問題，確認上次學的還記得
-6. Create the solution file using the template below
+6. Create the solution file per the `problem-file-setup` skill at `.claude/skills/problem-file-setup/SKILL.md` (owns filename convention, location, and full template with English Problem block)
 7. **記錄開始時間**：`**開始時間：{HH:MM}**`
-
-### Solution File Template
-
-- **Filename**: `{number}_{snake_case_title}.py` (e.g., `0547_number_of_provinces.py`)
-- **Location**: `solutions/` (difficulty recorded in the file's docstring, not the folder)
-
-```python
-"""
-LeetCode {number}. {title}
-Difficulty: {Easy/Medium/Hard}
-Tags: {tags}
-URL: https://leetcode.com/problems/{slug}/
-
-思路：
-    {用自己的話描述解題思路}
-
-複雜度：
-    Time: O(?)
-    Space: O(?)
-"""
-
-
-class Solution:
-    def method_name(self, ...):
-        pass
-
-
-if __name__ == "__main__":
-    s = Solution()
-    # Test cases
-    assert s.method_name(...) == expected, "Case 1"
-    assert s.method_name(...) == expected, "Case 2"
-    # Edge case
-    assert s.method_name(...) == expected, "Edge case"
-    print("All tests passed!")
-```
-
-Pre-fill the docstring (number, title, difficulty, tags, URL) and the `if __name__` section with 2-3 test cases + 1 edge case. Leave `思路` and `複雜度` for the student to fill in.
 
 ## Practice Flow
 

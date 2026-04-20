@@ -73,9 +73,7 @@ Optional argument for topic focus: $ARGUMENTS
    - 編號接續 `study/` 資料夾中最大的編號
 
 6. **問學生要從哪題開始**，然後以 `/practice` 助教模式引導該題：
-   - Create the solution file using the template and naming convention from `/practice`
-   - File location: `solutions/` (difficulty noted in the docstring)
-   - Filename: `{number}_{snake_case_title}.py`
+   - Create the solution file per the `problem-file-setup` skill at `.claude/skills/problem-file-setup/SKILL.md`
    - Follow the full practice flow (approach discussion → coding → optimize → teach back → follow-up → timing)
    - After solving, commit the solution file
 

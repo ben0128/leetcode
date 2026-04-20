@@ -35,8 +35,8 @@ Optional argument for topic focus: $ARGUMENTS
 - Do NOT give progressive hints like a tutor — interviewers give 1-2 small hints at most
 
 ### Phase 4 — Coding (~0:12)
-- Create the solution file: `{difficulty}/_{number}_{snake_case_title}.py` using the template from CLAUDE.md
-  - Pre-fill docstring (number, title, difficulty, tags, URL) and test cases
+- Create the solution file per the `problem-file-setup` skill at `.claude/skills/problem-file-setup/SKILL.md`
+  - Pre-fill docstring (number, title, difficulty, tags, URL, full Problem statement) and test cases
   - Leave `思路` and `複雜度` for the student
 - Stay mostly silent while the student codes
 - If student is silent too long → "Can you walk me through what you're thinking?"
