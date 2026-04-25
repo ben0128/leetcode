@@ -73,7 +73,7 @@
 | Array / Hashing | 30+ | ✅✅ | — | proficient | 基本功扎實；歷史 anagram/sudoku 有掙扎但已鞏固 |
 | Two Pointers | 8 | ✅✅ | — | proficient | 歷史 three-sum / palindrome 早期掙扎，最終 optimal |
 | Stack / Monotonic Stack | 9+ | ⚠️⚠️ | 2d | **weak** | 394 Decode String 重度卡關（⚠️⚠️），嵌套 parsing mental model 未建立 |
-| Binary Search | 8+ | ✅✅ | — | proficient | 覆蓋完整 |
+| Binary Search | 9+ | ⚠️✅ | 2d | **weak** | 162 ⚠️ 揭露 BS template（A: `l<r` vs B: `l<=r`）區分不熟；non-monotonic invariant 需引導 |
 | Trees (general) | 19+ | ⚠️⚠️ | 2d | **weak** | 236 LCA ⚠️（第一版漏遞迴右子樹）；94 ⚠️ |
 | BST | 3 | ⚠️✅ | 2d | **weak** | 230 Kth ⚠️；歷史 LCA 沒用 BST 性質 O(h) |
 | Backtracking | 12+ | ✅✅ | — | proficient | subsets/permutations/combinations 全覆蓋 |
@@ -129,6 +129,18 @@
 - **相關題**：394、726、227、224、636、1096（全都是同一個 pattern）
 - **筆記**：`notes/nested_parsing_stack.md`
 - **下次 /study 優先納入**：227 Basic Calculator II（同 pattern 再練一題，鞏固模型）
+
+#### 🔴 特別標記：Binary Search Template 區分不熟（2026-04-25 新增）
+
+- **卡點**：162 Find Peak Element。Template A（`while l < r`, return l）vs Template B（`while l <= r`, return -1 / mid）的差別**不清楚**，導致 code 寫起來「靠感覺」而非依規則挑模板
+- **判斷規則**（這次練習建立）：
+  - **找位置 + 答案保證存在（invariant 維持）→ Template A**（如 162、278 First Bad Version、找最小滿足 X 的 index）
+  - **找特定值 + 可能不存在 → Template B**（如經典 sorted array 找 target）
+- **附帶弱點**：non-monotonic 陣列上 BS 的 invariant 需要引導推 case A/B 才能說服自己「為什麼丟一半安全」
+- **equality 殺手**：當比較結果無法決定丟哪半（== 出現），BS 直接退化 O(n)。不是「換 if/else」可以救
+- **相關題**：162、278、153 Find Min in Rotated、33/81 Search in Rotated、35 Search Insert、875 Koko、1011 Capacity to Ship、4 Median of Two Sorted Arrays
+- **筆記**：`notes/binary_search_templates.md`（兩種 template 完全指南 + 練習路徑）
+- **下次 /study 優先納入**：278 First Bad Version（純 Template A 鞏固）+ 33 Search in Rotated Sorted Array（Template B + invariant 進階）
 
 ---
 

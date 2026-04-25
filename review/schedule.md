@@ -22,6 +22,7 @@
 | 236 | LCA of Binary Tree | M | Tree / Recursion | 2026-04-18 | ⚠️ | 2d | 2026-04-20 | 第一版 code 漏遞迴右子樹；post-order 與 inorder 措辭混淆；follow-up LL intersection 方向錯 |
 | 394 | Decode String | M | Stack / Nested Parsing | 2026-04-18 | ⚠️⚠️ | 2d | 2026-04-20 | **重度卡關（高優先重練）**。無法 visualize 嵌套處理；iterative 版 `[` push 丟失外層 char、`]` pop 不用 popC。心智模型：stack = 函式呼叫 stack 的手動版；每次只想一層 |
 | 127 | Word Ladder | H | Graph / BFS | 2026-04-21 | ⚠️ | 2d | 2026-04-23 | 首次 Hard BFS。主架構一次過，但需 BFS/wildcard 兩個提示起步。複雜度錯寫 O(M·N) 應為 O(M·N²)（漏算 slice 與 key 長度）。Visited 次優（pop 時 check 而非 enqueue 時）。Follow-up bidirectional BFS 誤認為「記憶體更多」+ 漏掉 "expand smaller frontier" |
+| 162 | Find Peak Element | M | Binary Search | 2026-04-25 | ⚠️ | 2d | 2026-04-27 | BS on non-monotonic array。Invariant（升→右、降→左）需引導推 case A/B；Template A vs B 差別一開始不清；equality follow-up 需多次 trace 才理解「== 時 BS 崩潰，degrade O(n)」非「換 else 就好」 |
 
 ## Mastered（通過 32d 複習後結業）
 

@@ -35,11 +35,14 @@ Problem:
         - nums[i] != nums[i + 1] for all valid i.
 
 思路：
-    TODO
+    constraint 保證相鄰不相等 → 比較 nums[mid] 與 nums[mid+1]：
+    - 升（mid < mid+1）：右半 [mid+1, r] 必有 peak（最差情況右端就是 peak）→ l = mid+1
+    - 降（mid > mid+1）：左半 [l, mid] 必有 peak（mid 自己可能就是）→ r = mid
+    每次保留的半邊都仍包含 peak，l == r 時即為答案。
 
 複雜度：
-    Time: O(?)
-    Space: O(?)
+    Time: O(log(n)) n = nums長度
+    Space: O(1)
 """
 
 from typing import List
@@ -47,8 +50,16 @@ from typing import List
 
 class Solution:
     def findPeakElement(self, nums: List[int]) -> int:
-        pass
+        l, r = 0, len(nums)-1
 
+        while l < r:
+            mid = l + (r-l) // 2
+            if nums[mid] < nums[mid+1]:
+                l = mid+1
+            elif nums[mid] > nums[mid+1]:
+                r = mid
+        return l
+                
 
 if __name__ == "__main__":
     s = Solution()
