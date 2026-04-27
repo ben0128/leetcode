@@ -15,37 +15,41 @@ URL: https://leetcode.com/problems/number-of-provinces/
 
 class Solution:
     def findCircleNum(self, isConnected: list[list[int]]) -> int:
-        n = len(isConnected)
-        roots = [i for i in range(n)]
+        n = len(isConnected[0])
+        roots = [num for num in range(n)]
         ranks = [0 for _ in range(n)]
-        def find(node):
-            while roots[node] != roots[roots[node]]:
-                roots[node] = roots[roots[node]]
-            return roots[node]
+
+        def find(n):
+            while roots[n] != roots[roots[n]]:
+                roots[n] = roots[roots[n]]
+            return roots[n]
 
         def union(x, y):
             rootX, rootY = find(x), find(y)
-
             if rootX != rootY:
-                if ranks[rootX] < ranks[rootY]:
+                if ranks[rootX] > ranks[rootY]:
+                    roots[rootY] = rootX
+                elif ranks[rootX] < ranks[rootY]:
                     roots[rootX] = rootY
-                elif ranks[rootX] > ranks[rootY]:
-                    roots[rootY] = rootX
                 else:
-                    roots[rootY] = rootX
-                    ranks[rootX] += 1
+                    roots[rootX] = rootY
+                    ranks[rootY] += 1
             return
-        
-        for i in range(n):
-            for j in range(n):
-                if i > j and isConnected[i][j] == 1:
-                    union(i, j)
-        
-        ans = set()
-        for root in roots:
-            ans.add(find(root))
-        return len(ans)
 
+        for i in range(n):
+            row = isConnected[i]
+            for j in range(n):
+                cell = row[j]
+                if i > j and cell == 1:
+                    union(i, j)
+        countSet = set()
+        
+        for root in range(n):
+            countSet.add(find(root))
+        
+        return len(countSet)
+
+        
 
 
 if __name__ == "__main__":

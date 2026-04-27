@@ -14,7 +14,7 @@
 | 94 | Binary Tree Inorder Traversal | M | Tree / Stack | 2026-04-12 | ⚠️ | 2d | 2026-04-14 | iterative inorder 首次 |
 | 230 | Kth Smallest Element in BST | M | Tree / BST | 2026-04-12 | ⚠️ | 2d | 2026-04-14 | iterative inorder 應用 |
 | 235 | Lowest Common Ancestor of BST | M | Tree / BST | 2026-04-11 | ✅ | 2d | 2026-04-22 | 2026-04-20 複習 ⚠️（需引導 iterative O(1) space；複雜度措辭 O(n) 應為 O(h)）→ 維持 2d |
-| 547 | Number of Provinces | M | Union Find | 2026-04-12 | ✅ | 2d | 2026-04-14 | UF template + path compression + rank |
+| 547 | Number of Provinces | M | Union Find | 2026-04-12 | ✅ | 2d | 2026-04-29 | 2026-04-27 SR 複習 ⚠️：3 個 UF template bug（find 用 == 漏 path compression、union by rank 比 leaf 而非 root、掛 leaf 而非 root），測資簡單沒爆出來 → 維持 2d。Template 肌肉記憶仍未穩固 |
 | 97 | Interleaving String | M | 2D DP | 2026-04-13 | ⚠️ | 2d | 2026-04-15 | 第一次 2D DP，邊界需引導 |
 | 295 | Find Median from Data Stream | H | Heap | 2026-04-13 | ✅ | 2d | 2026-04-15 | two-heap pattern |
 | 239 | Sliding Window Maximum | H | Monotonic Queue | 2026-04-13 | ⚠️ | 2d | 2026-04-15 | 首次 monotonic queue，有兩個實作 bug |
