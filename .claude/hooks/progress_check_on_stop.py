@@ -53,10 +53,4 @@ if not analysis_changed:
     missing.append("ANALYSIS.md")
 
 msg = f"⚠️ solutions/ 有變動但 {' 和 '.join(missing)} 未更新 — 記得跑進度追蹤（/practice 完題步驟 8 / schedule.md Update Protocol）"
-print(json.dumps({
-    "systemMessage": msg,
-    "hookSpecificOutput": {
-        "hookEventName": "Stop",
-        "additionalContext": msg,
-    },
-}, ensure_ascii=False))
+print(json.dumps({"systemMessage": msg}, ensure_ascii=False))
