@@ -24,6 +24,7 @@
 | 127 | Word Ladder | H | Graph / BFS | 2026-04-21 | ⚠️ | 2d | 2026-04-23 | 首次 Hard BFS。主架構一次過，但需 BFS/wildcard 兩個提示起步。複雜度錯寫 O(M·N) 應為 O(M·N²)（漏算 slice 與 key 長度）。Visited 次優（pop 時 check 而非 enqueue 時）。Follow-up bidirectional BFS 誤認為「記憶體更多」+ 漏掉 "expand smaller frontier" |
 | 162 | Find Peak Element | M | Binary Search | 2026-04-25 | ⚠️ | 2d | 2026-04-27 | BS on non-monotonic array。Invariant（升→右、降→左）需引導推 case A/B；Template A vs B 差別一開始不清；equality follow-up 需多次 trace 才理解「== 時 BS 崩潰，degrade O(n)」非「換 else 就好」 |
 | 227 | Basic Calculator II | M | Stack / Parsing | 2026-04-28 | ⚠️ | 2d | 2026-04-30 | 首次 prev_op pattern。第一版自創「看到 +/- 就 drain」太繞、邊界錯（`1-1+1` 崩）。需引導核心 insight：+/- 延後、*// 立即 → 變數設計：prev_op + 累積 num。雷：truncate toward zero 必須 `int(a/b)` 不是 `a//b`（負數會差 1）。Follow-up O(1) space（res + lastNum）已寫過：但寫的時候 `*///` 分支誤用 closure 的 `num` 而非參數 `value`，雖然測資沒爆但概念錯（call site 剛好讓 num==value）→ 已修。**SR 重做時要從 O(1) 版本起步**，不是 stack 版 |
+| 721 | Accounts Merge | M | Union Find / Hash Map | 2026-05-01 | ⚠️ | 2d | 2026-05-03 | UF 進階應用。**選 node 沒問題（row index）但講不出跨行 union 機制** — 反覆說「行跟行 union」hand-waving，需追問三次才答出 emailToIdx[email]=row 是橋樑。**核心 bug：寫成 `roots[i] = find(j)` 而非 `roots[find(i)] = find(j)`** — 第二次 union 直接覆蓋自己 parent，把之前那條鏈砍掉。3 個原始測資都過（鑽石型 case 缺漏），加上 row 2 同時連 row 0/row 1 的 case4 才爆。思路第一版事實錯誤（「相同的 index」應為「相同的 email」）。複雜度首次寫 O(n²logn) 也錯。**SR 重做時重點：(1) 跨行 union 機制要直接講出 emailToIdx 橋樑 (2) 寫 union 時 `find` 兩邊** |
 
 ## Mastered（通過 32d 複習後結業）
 
