@@ -78,7 +78,7 @@
 | BST | 3 | ⚠️✅ | 2d | **weak** | 230 Kth ⚠️；歷史 LCA 沒用 BST 性質 O(h) |
 | Backtracking | 12+ | ✅✅ | — | proficient | subsets/permutations/combinations 全覆蓋 |
 | Graph BFS/DFS | 15+ | ⚠️✅ | 2d | **weak** | 127 首次 Hard BFS ⚠️（BFS/wildcard 提示 + 複雜度漏算 slice cost）；14+ 題基礎仍在 |
-| Union Find | 2 | ⚠️✅ | 2d | **weak** | 題數<3；count-connected 歷史 11 次；547 ✅ 剛鞏固 |
+| Union Find | 3 | ⚠️⚠️ | 2d | **weak** | 547 SR ⚠️（template 3 bug）+ 721 ⚠️（斷鏈 bug + 跨行 union 機制講不出）；UF template 肌肉記憶 + 「搬祖宗」union 寫法仍未穩固 |
 | DP (1D) | 5 | ⚠️— | — | **weak** | house-robber 8 次，直覺未自動化 |
 | DP (2D) | 2 | ⚠️⚠️ | 2d | **weak** | 64 ⚠️ 實作對但講不出「為什麼 1D work」；97 ⚠️ 邊界需引導 |
 | DP (Knapsack) | 2 | ⚠️— | — | **weak** | 題數<3；partition-equal-subset-sum 5 次 |
@@ -178,6 +178,39 @@
 ## 六、讀書計畫紀錄
 
 > 每完成一份 5 題讀書計畫後，紀錄在此。用 `/study` 生成新計畫。
+
+### Plan #3 — 2026-04-21 ~ 2026-05-01
+主題重點：Stack nested parsing 鞏固、Union Find 肌肉記憶、DP + Binary Search 進階
+
+| # | 題目 | 結果 | 花費時間 | 筆記 |
+|---|------|------|----------|------|
+| 1 | 162. Find Peak Element | ⚠️ | — | BS on non-monotonic array：invariant（升→右、降→左）需引導；Template A vs B 一開始混淆；equality follow-up 需多次 trace 才理解 BS 在 == 時崩潰 |
+| 2 | 547. Number of Provinces (SR) | ⚠️ | — | 從首次 ✅ 退步。3 個 UF template bug：find 用 `==` 漏 path compression、union by rank 比 leaf 而非 root、掛 leaf 而非 root。需 review 才抓出 → 維持 SR 2d。Template 肌肉記憶仍未穩固 |
+| 3 | 227. Basic Calculator II | ⚠️ | — | 首次 prev_op pattern。第一版「看到 +/- 就 drain」太繞、邊界錯（`1-1+1` 崩）。引導核心 insight：+/- 延後、*// 立即。雷：truncate toward zero 必須 `int(a/b)` 不是 `a//b`。Follow-up O(1) space 完成但 closure 變數誤用 |
+| 4 | 721. Accounts Merge | ⚠️ | — | UF 進階。選 node 沒問題但**跨行 union 機制講不出**，需追問三次才答出 emailToIdx 橋樑。**核心 bug：`roots[i] = find(j)` 斷鏈**（鑽石 case 才爆）。思路第一版事實錯誤、複雜度也錯。新增 notes「斷鏈陷阱」+「hash map 當橋樑」 |
+| 5 | 1235. Maximum Profit in Job Scheduling | ⚠️ | — | 首次 weighted interval scheduling Hard。**DP 定義初版錯**（i 是時間、forward push）需糾正為 backward「選/不選」。**漏不選分支**。**Index 偏移 bug**：dp 偏移 1 設計沒貫徹。修法後比建議更乾淨：`bisect_right` 直接當 dp index 自動處理 base case。BS Template 暖身回答錯但用 bisect_right 繞過。Stream follow-up 答對 |
+
+**整體觀察：**
+- **5 題全部 ⚠️**（與 Plan #2 同樣全 ⚠️），挑戰度拉對了但每題都需引導
+- **共通 root cause：思路講解不精準**
+  - #4 思路第一版「相同的 index」（事實錯誤）
+  - #5 「i 是時間」（無法 work，10^9 開不下陣列）
+  - #1 暖身回「找區間」（框架錯）
+  - 寫 code 之前的口述常常有 hand-wave / 概念糊
+- **共通 root cause：模板/設計意圖不貫徹**
+  - #2 UF template 肌肉記憶 3 bug
+  - #4 union 寫法搬「自己」而非搬「祖宗」（斷鏈）
+  - #5 dp 偏移 1 的設計只在宣告時有，查表時又用 job index 查
+- **新建心智模型**：UF「斷鏈陷阱」、「hash map 當橋樑」進階模式（已寫進 `notes/union_find_template.md`）
+- **平均花費時間沒紀錄** — 5 題完成跨度 10 天但無單題計時，建議 Plan #4 開始計時
+
+**下次建議加強：**
+- **思路口述訓練**：寫 code 前必須能用 1-2 句講清楚 dp[i] 定義 / UF node 選擇 / BS invariant，不准 hand-wave
+- **設計意圖一致性**：偏移 1、特判 -1 等設計選了就全程貫徹，不要寫一半變回 0-indexed
+- 開始計時（Plan #4 起）+ 嘗試 `/mock` 模式建立時間壓力下表現
+- DP + BS 同 pattern 變體（Russian Doll Envelopes #354、Longest Increasing Subsequence #300 with patience sort）
+
+---
 
 ### Plan #2 — 2026-04-18 ~ 2026-04-21
 主題重點：Tree/BST 對比學習、Stack 字串處理、2D DP 鞏固、Graph BFS 進階
