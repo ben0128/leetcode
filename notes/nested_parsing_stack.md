@@ -81,9 +81,77 @@ def parse_nested(s: str):
 
 **這些題的差別只在 state 的「型態」不同**（字串 / dict / 數字 / 集合），stack 的 push/pop 時機和接回邏輯是同一個 pattern。
 
+## Recursive 版本：index passing 的核心難點
+
+> 補充於 2026-05-02 SR 複習，394 recursive 版自推時體會到
+
+### 卡點：caller 怎麼知道內層讀到哪？
+
+```
+s = "3[a2[c]]"
+recursive(0)：讀 '3' '[' → 進入內層 recursive(2)
+                          內層讀 a, 2, [, c, ] → return ?
+recursive(0) 怎麼從哪裡繼續？
+```
+
+→ recursion **不能只 return decoded string**，必須**同時 return 讀到哪個 idx**。
+
+### 兩種解法
+
+**A. Tuple return：`return (decoded, new_idx)`**（推薦，純函式）
+```python
+def parse(idx):
+    state = initial()
+    while idx < n:
+        c = s[idx]
+        if c == '[':
+            inner, nxt = parse(idx + 1)        # 進入內層
+            state = merge(state, inner)
+            idx = nxt + 1                       # 跳過 ]
+        elif c == ']':
+            return state, idx                   # 把當前 idx 一起 return
+        ...
+        idx += 1
+    return state, idx                           # 外層 fallthrough 也要保持同 shape
+```
+
+**B. Mutable shared state**：把 idx 放在 outer scope（如 `self.i` 或 list `[i]`），recursion 只 return decoded
+- 好處：function signature 簡單
+- 缺點：side effect、不純函式、平行/重入難
+
+### 設計陷阱：return shape 一致性
+
+如果想偷懶讓「inner exit」和「outer fallthrough」return 不同 shape：
+```python
+elif c == ']':
+    return [word, idx]   # 內層 shape：[list, int]
+...
+return word              # 外層 shape：list — 不一致！
+```
+看似 work（因為 outer 永遠不會走 `]`），但這是 **implicit invariant**：
+- 「outer 只會 fallthrough，inner 只會走 `]`」這條約束沒寫在 code 裡
+- 重構時若有人從 outer 也呼叫 `recursive(non-zero)` 就爆
+- code review / 多人協作會出事
+
+→ **所有 return path 都用同 shape**，外層的 idx 用 `None` 或 `idx` 都行，只要一致。
+
+## Python string concat 的 O(N²) trap
+
+`word += c` 或 `word = prevWord + word*num` 在 Python 都是 O(N) per op（字串不可變，每次複製整個）。
+→ 嵌套 parsing 累積長字串時，naive 寫法是 **O(output_length²)**。
+→ 改用 `list` 累積 chars，最後 `''.join(list)`：每次 append 攤銷 O(1)。
+→ 但 `[` 處要 push list 還是 string？取捨：
+  - 純 list throughout：`[` 時 push list 進 stack，`]` 時 `outer + inner * num`（inner 已是 string）
+  - **Materialize at boundary**：`]` 時 `''.join(inner_list) * num` 變 string，這行 O(L) 一次性
+  - 後者較簡單，總工作量仍 O(output)，常數較小
+
+面試裡知道這個 trade-off 並能講出來會加分。
+
 ## 複習時問自己
 
 1. 進入內層時要 push 什麼？為什麼？（答：外層的**所有** local state，否則離開時拿不回來）
 2. 離開內層時，怎麼把內層結果接回外層？
 3. Stack 裡的資料型態是什麼？為什麼不是兩個獨立 stack？
 4. 為什麼這個 pattern 也可以用 recursion 寫？兩種版本哪個面試官比較接受？（答：iterative 更乾淨，面試官通常偏好；但會要你能口述 recursion 版本）
+5. **Recursion 版的 return 一定要包含什麼？**（答：除了結果，還要 new_idx，否則 caller 無法 resume）
+6. **Python `s += c` 為什麼是效能 trap？怎麼避免？**（答：字串不可變每次複製，用 list + ''.join() 攤銷 O(1)）

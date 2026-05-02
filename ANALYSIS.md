@@ -72,7 +72,7 @@
 |------|---------|----------|-----------|-----|------|
 | Array / Hashing | 30+ | ✅✅ | — | proficient | 基本功扎實；歷史 anagram/sudoku 有掙扎但已鞏固 |
 | Two Pointers | 8 | ✅✅ | — | proficient | 歷史 three-sum / palindrome 早期掙扎，最終 optimal |
-| Stack / Monotonic Stack | 9+ | ⚠️⚠️ | 2d | **weak** | 394 Decode String 重度卡關（⚠️⚠️），嵌套 parsing mental model 未建立 |
+| Stack / Monotonic Stack | 9+ | ⚠️✅ | 7d | **borderline** | 394 SR ✅ 大進步（iterative 三大卡點全解 + 自推 recursive index passing）；嵌套 parsing mental model 已建立 |
 | Binary Search | 9+ | ⚠️✅ | 2d | **weak** | 162 ⚠️ 揭露 BS template（A: `l<r` vs B: `l<=r`）區分不熟；non-monotonic invariant 需引導 |
 | Trees (general) | 19+ | ⚠️⚠️ | 2d | **weak** | 236 LCA ⚠️（第一版漏遞迴右子樹）；94 ⚠️ |
 | BST | 3 | ⚠️✅ | 2d | **weak** | 230 Kth ⚠️；歷史 LCA 沒用 BST 性質 O(h) |

@@ -4,41 +4,72 @@ Difficulty: Medium
 Tags: Stack, String, Recursion
 URL: https://leetcode.com/problems/decode-string/
 
+Problem:
+    Given an encoded string, return its decoded string.
+
+    The encoding rule is: k[encoded_string], where the encoded_string inside
+    the square brackets is being repeated exactly k times. Note that k is
+    guaranteed to be a positive integer.
+
+    You may assume that the input string is always valid; there are no extra
+    white spaces, square brackets are well-formed, etc. Furthermore, you may
+    assume that the original data does not contain any digits and that digits
+    are only for those repeat numbers, k. For example, there will not be input
+    like 3a or 2[4].
+
+    The test cases are generated so that the length of the output will never
+    exceed 10^5.
+
+    Example 1:
+        Input: s = "3[a]2[bc]"
+        Output: "aaabcbc"
+
+    Example 2:
+        Input: s = "3[a2[c]]"
+        Output: "accaccacc"
+
+    Example 3:
+        Input: s = "2[abc]3[cd]ef"
+        Output: "abcabccdcdcdef"
+
+    Constraints:
+        - 1 <= s.length <= 30
+        - s consists of lowercase English letters, digits, and square brackets '[]'.
+        - s is guaranteed to be a valid input.
+        - All the integers in s are in the range [1, 300].
+
 思路：
-    Iterative stack。關鍵 insight：`char` 是答案累積器，stack 只存「進入 [ 之前的外層快照 (num, char)」。
-    - digit：累積多位數 `num = num*10 + int(c)`
-    - `[`：push (num, char) 暫存外層；重置 num=0, char=''
-    - `]`：pop 外層 (prev_num, prev_str)，`char = prev_str + char * prev_num`
-    - 字母：append 到 char
-    結尾 return char。
-
-    常見 bug：
-    1. `[` 時 push [num, '']（硬寫空字串）→ 外層 char 丟失，nested 崩潰
-    2. `]` 時不用 popC，只推回 [1, char*popN] → 把 stack 當成答案累積器，違反用途
-
+    iterative + stack 會比較直覺, 先stack = [] 蒐集每一層的字串, 當進入下一層時(遇到'[')把上一層的結果 存入stack中, 等到遇到']' 在pop出接起來
+    recursive 會跑一個for 迴圈, return (word, idx)：caller 拿到 idx 才知道內層讀到哪、要從哪繼續
 複雜度：
-    Time: O(N) — N = 解碼後輸出長度（可能遠大於 input）
-    Space: O(N) — char 累積器 + stack 中各層外層字串加總
+    n = 所有 數字*字串 後接在一起的最終長度
+    Time: O(n)
+    Space: O(n) 
 """
 
 
 class Solution:
     def decodeString(self, s: str) -> str:
-        num = 0
-        char = ''
-        stack = []
-        for c in s:
-            if c.isdigit():
-                num = num * 10 + int(c)
-            elif c == '[':
-                stack.append([num, char])
-                num, char = 0, ''
-            elif c == ']':
-                popN, popC = stack.pop()
-                char = popC + popN * char
-            else:
-                char += c
-        return char
+        n = len(s)
+        def recursive(idx):
+            num = 0
+            word = []
+            # for k, c in enumerate(s[idx:], idx):
+            while idx < n:
+                c = s[idx]
+                if c.isdigit():
+                    num = num*10 + int(c)
+                elif c == '[':
+                    tmpWords, nxtIdx = recursive(idx+1)
+                    word.append(''.join(tmpWords)*num)
+                    idx, num = nxtIdx, 0
+                elif c == ']':
+                    return [word, idx]
+                else:
+                    word.append(c)
+                idx += 1
+            return [word, None]
+        return ''.join(recursive(0)[0])
 
 
 
