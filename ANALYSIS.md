@@ -79,7 +79,7 @@
 | Backtracking | 12+ | ✅✅ | — | proficient | subsets/permutations/combinations 全覆蓋 |
 | Graph BFS/DFS | 15+ | ⚠️✅ | 2d | **weak** | 127 首次 Hard BFS ⚠️（BFS/wildcard 提示 + 複雜度漏算 slice cost）；14+ 題基礎仍在 |
 | Union Find | 3 | ⚠️⚠️ | 2d | **weak** | 547 SR ⚠️（template 3 bug）+ 721 ⚠️（斷鏈 bug + 跨行 union 機制講不出）；UF template 肌肉記憶 + 「搬祖宗」union 寫法仍未穩固 |
-| DP (1D) | 5 | ⚠️— | — | **weak** | house-robber 8 次，直覺未自動化 |
+| DP (1D) | 6 | ⚠️— | 2d | **weak** | house-robber 8 次；1235 weighted interval scheduling ⚠️（DP+BS hybrid，dp 偏移 1 沒貫徹） |
 | DP (2D) | 2 | ⚠️⚠️ | 2d | **weak** | 64 ⚠️ 實作對但講不出「為什麼 1D work」；97 ⚠️ 邊界需引導 |
 | DP (Knapsack) | 2 | ⚠️— | — | **weak** | 題數<3；partition-equal-subset-sum 5 次 |
 | Heap | 3+ | ✅⚠️ | 2d | **weak** | top-k / kth-largest 早期 5-6 次；295 最近 ✅ |
