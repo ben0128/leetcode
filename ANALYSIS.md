@@ -163,6 +163,7 @@
 4. Union Find template 肌肉記憶化：再練 `accounts-merge`、`graph-valid-tree` 變體、`number-of-provinces`
 5. 做 `sliding-window-maximum`（Monotonic Queue）
 6. 中等 DP 練習：`interleaving-strings`、`distinct-subsequences`
+7. **DFS-based 有向圖環偵測（3-color / 3-state）**：207 SR 重做時改用 DFS，或練 802 Find Eventual Safe States、210 Course Schedule II（DFS 版）。Plan #4 #3 用 Kahn's BFS 寫對但 DFS 解法完全沒接觸過 — 面試 follow-up「用 recursion 寫」會卡
 
 ### P2 — 持續練習
 7. 進階 DP：`burst-balloons`、`regular-expression-matching`
