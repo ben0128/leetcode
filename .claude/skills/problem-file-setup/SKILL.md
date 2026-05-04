@@ -13,6 +13,7 @@ Single source of truth for how solution files are created. All modes (`/practice
 2. **Problem statement is always English** — matches LeetCode original and Google interview language; also serves as English reading practice.
 3. **`思路` and `複雜度` are left empty (or `TODO`)** for the student to fill in themselves; Chinese is OK here.
 4. **Test cases are pre-filled** with 2–3 normal cases + 1 edge case using `assert`.
+5. **`Tags:` field must NOT reveal the data structure / algorithm.** Use only the most generic tag (`Array`, `String`, `Math`, `Tree`, `Graph` if structural, etc.) — never `Heap`, `DP`, `Topological Sort`, `Union Find`, `Sliding Window`, `Two Pointers`, `Quickselect`, `Binary Search`, `Backtracking`, etc. The student must figure out the technique themselves; the file header can't leak it. (Per CLAUDE.md "出題時不要洩露資料結構/演算法".)
 
 ## Location and naming
 
@@ -74,7 +75,7 @@ if __name__ == "__main__":
 ## What to pre-fill vs. leave for the student
 
 **Pre-fill (interviewer/tutor does this):**
-- Header: number, title, difficulty, tags, URL
+- Header: number, title, difficulty, **vague tags only** (see Hard rule 5), URL
 - `Problem:` block with description + 2 examples + constraints (English)
 - `if __name__` test block with 2–3 cases + 1 edge case
 - Empty `class Solution` with method signature matching LeetCode
