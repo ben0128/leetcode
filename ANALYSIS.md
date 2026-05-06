@@ -180,6 +180,46 @@
 
 > 每完成一份 5 題讀書計畫後，紀錄在此。用 `/study` 生成新計畫。
 
+### Plan #4 — 2026-05-01 ~ 2026-05-05
+主題重點：BST inorder 鞏固、Heap 經典、Graph topo sort 新 pattern、DP 經典、Tree Hard 挑戰
+
+| # | 題目 | 結果 | 花費時間 | 筆記 |
+|---|------|------|----------|------|
+| 1 | 230. Kth Smallest in BST (SR) | ⚠️ | — | recursive inorder + early return 寫對且 tests pass，但 (1) 複雜度錯寫 Time O(n)/Space O(log n) 應為 O(H+k)/O(H) 沒考慮 skewed (2) `count=[k]` 用 list 包 int 沒講為何不用 nonlocal (3) truthiness trap：return node 物件剛好沒事，但若 return val 會被 val=0 騙到 — 未口頭點出 (4) follow-up（修改頻繁時優化）未答 |
+| 2 | 973. K Closest Points | ✅ | — | max-heap of size k 一次寫對；`(-dis, i)` idx 當 tie-breaker 細節到位。Gap：(1) 沒主動講 max-heap vs min-heap 直覺 (2) 不知 quickselect 名稱 (3) sqrt 跳過數學依據（monotonic + 非負）講太籠統 |
+| 3 | 207. Course Schedule | ✅ | — | 首次 Kahn's algorithm，自己推導 in-degree + BFS 核心。Code 第一版冗餘：visited set 多餘、BFS-by-level 結構也多餘（topo sort 不分 level）。複雜度 O(E) 漏算 V 應為 O(V+E)。**DFS-based 3-color cycle detection 完全沒接觸過** → ANALYSIS P1 #7 |
+| 4 | 300. Longest Increasing Subsequence | ⚠️ | 10 min | DP + BS 兩版過 7 cases。**DP 卡點**：dp[i] 定義初版模糊未錨定 ending at i，需引導；答案是 max(dp) 非 dp[-1]。**BS 全新 pattern**：初次誤判為 mono stack，用 [0,1,0,3,2,3] 反例破解；tails 演算法 + invariant 從零教學。**思路 3 段需多次精確化**（tails 定義 / 為何嚴格遞增 / 為何覆寫安全），初版「紀錄最大長度 list」帶過明顯不夠 |
+| 5 | 124. Binary Tree Maximum Path Sum | ⚠️ | 10 min | Hard 但極快（< 40 min 目標）。Code 一次過 7 cases。**核心 insight 對**：分開維護回傳值（一條腿）與全局 max（兩腿折返）+ 用 max(腿, 0) 處理負腿。Q-A/B 不對稱口述對、Q-D self vs tuple 理由具體。**問題**：(1) 思路書寫與 code 不符（寫「return [...]」但 code 用 self.）(2) Code 正確但繁瑣（4 候選列舉 vs 個別淨化腿的乾淨寫法）(3) 沒主動 clarifying，被列點問才答 |
+
+**整體觀察：**
+- **5 題 ⚠️✅✅⚠️⚠️**（3 ⚠️ + 2 ✅），比 Plan #3 進步（Plan #3 全 ⚠️）
+- **首次單題計時**（Plan #4 起新規則）：300 與 124 都 10 min，遠超 Medium <25 min / Hard <40 min 目標。**速度建立但伴隨思路書寫鬆散**——快但口述不精準
+- **新建心智模型**：
+  - **Kahn's topological sort**（in-degree + BFS）→ 自推核心邏輯
+  - **Patience sort / tails invariant**（LIS O(n log n)）→ 完整建立「tails[k] = 長度 k+1 的最小結尾」+ 砍結尾論證 + 覆寫安全雙段論證
+  - **Tree split-at-node**（124 兩腿折返 vs 一腿延伸）→ 不對稱原因清楚
+- **共通 root cause：思路文字書寫鬆散**
+  - 207 思路寫得 OK 但複雜度漏 V
+  - 300 「紀錄最大長度 list」初版幾乎無資訊量
+  - 124 寫「return [...]」但 code 沒 return tuple——書寫與實作不同步
+  - Plan #3 已點出此問題，Plan #4 仍重複出現
+- **共通 root cause：Code 第一版常列舉 case 而非提煉 pattern**
+  - 207：visited set + BFS-by-level（多餘的安全網）
+  - 300 第一版：`max([0]+[...])` 用 list 拼接避免空 list
+  - 124：`max(...resL+v+resR, v, v+resL, v+resR)` 列 4 case 而非用 `max(腿, 0)` 個別淨化
+- **首次速度紀錄**：M 約 10 min（300 DP+BS 兩版）、H 約 10 min（124）。建議下次 mock 模式驗證有時間壓力時是否仍能維持
+
+**下次建議加強：**
+- **思路書寫精準性**：寫 code 後**回頭檢查思路與 code 是否同步**，特別是 return type、變數作用域
+- **Code review 自我檢查**：寫完跑過後問自己「有沒有列舉的 case 可以用一個操作收掉？」（max(x, 0) 是經典 pattern）
+- **主動 clarifying questions**：mock 模式下強制練習主動提問（不要等被問才答）
+- 207 SR 重做時用 **DFS 3-color cycle detection** 補新解法
+- 300 SR 重做時口述完整 tails invariant（3 段論證）
+- 124 SR 重做時用「個別淨化腿」乾淨寫法
+- 平均速度太快（Hard 10 min）建議轉入 mock 模式測試壓力下表現
+
+---
+
 ### Plan #3 — 2026-04-21 ~ 2026-05-01
 主題重點：Stack nested parsing 鞏固、Union Find 肌肉記憶、DP + Binary Search 進階
 
