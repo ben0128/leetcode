@@ -35,19 +35,37 @@ Problem:
         complexity?
 
 思路：
-    TODO（學生自己填；中文 OK）
+    tails[k] = 目前掃過的元素中，所有長度為 k+1 的嚴格遞增子序列中，最小的結尾值。
 
+    為何 tails 嚴格遞增（→ 可用 BS）：
+      任何長度 k+1 的遞增子序列，砍掉結尾就是長度 k 的遞增子序列；
+      被砍掉的結尾 > 剩下的最大元素 ≥ 長度 k 的最小結尾 = tails[k-1]。
+      故「長度 k+1 的最小結尾」> tails[k-1]，tails 嚴格遞增。
+
+    為何覆寫安全：
+      (a) 長度不變：覆寫只動 tails[idx]，沒有縮短陣列，已達到的最大長度被完整保留。
+      (b) 未來潛力變大：覆寫後 tails[idx] 變更小；結尾越小，未來能接上去的元素越多。
+      所以覆寫只會「保住現狀 + 改善未來」，從不「縮短現狀」。
 複雜度：
-    Time: O(?)
-    Space: O(?)
+    Time: O(nlog(n))
+    Space: O(n)
 """
 
 from typing import List
-
+from bisect import bisect_left
 
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
-        pass
+        n = len(nums)
+        tails = [nums[0]]
+        for i in range(1, n):
+            currNum = nums[i]
+            insertIdx = bisect_left(tails, currNum)
+            if len(tails) == insertIdx:
+                tails.append(currNum)
+            else:
+                tails[insertIdx] = currNum
+        return len(tails)
 
 
 if __name__ == "__main__":
