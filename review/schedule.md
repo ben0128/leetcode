@@ -11,7 +11,7 @@
 
 | # | 題目 | 難度 | 主題 | 首次日期 | 首次結果 | 當前階段 | 下次日期 | 備註 |
 |---|------|------|------|----------|----------|----------|----------|------|
-| 94 | Binary Tree Inorder Traversal | M | Tree / Stack | 2026-04-12 | ⚠️ | 2d | 2026-04-14 | iterative inorder 首次 |
+| 94 | Binary Tree Inorder Traversal | M | Tree / Stack | 2026-04-12 | ⚠️ | 2d | 2026-05-09 | iterative inorder 首次。2026-05-07 SR 複習 ⚠️：code 一次過 5 cases，但思路初版過薄（「左中右查找, 透過stack」未含 invariant）。Q1 invariant 答太弱（「每個 node 的 left 已推入」抓到表面但不夠強），Q2/Q3 答對結果但未解釋「為什麼不漏」。需 3 輪 Socratic + 具體 trace + 多選題（A/B/C 選項逼出 stack 頂端左子樹完整 visit 完）才升級到強化版。最終思路修為「pop 時已確認左子樹被走完, 所以可以安心訪問右側」抓到關鍵 invariant。SR 重做要點：(1) 開口就要直接講「pop 那一刻，左子樹保證已 visit 完」 (2) `while curr or stack` = 「還有路走 OR 還有債還」(3) `curr=node.right` 不漏的論證：左+自己都做完，剩右 → 維持 2d |
 | 230 | Kth Smallest Element in BST | M | Tree / BST | 2026-04-12 | ⚠️ | 2d | 2026-05-04 | 2026-05-02 SR 複習 ⚠️：recursive inorder + early return 寫對且 tests pass，但 (1) 複雜度錯寫 Time O(n)/Space O(log n)，正解 O(H+k)/O(H)，沒考慮 skewed tree (2) `count=[k]` 用 list 包 int 沒講為何不用 nonlocal (3) truthiness trap：return node 物件剛好沒事，但若 return val 會被 val=0 騙到 — 未口頭點出 (4) follow-up（修改頻繁時優化）未答 → 維持 2d |
 | 235 | Lowest Common Ancestor of BST | M | Tree / BST | 2026-04-11 | ✅ | 2d | 2026-04-22 | 2026-04-20 複習 ⚠️（需引導 iterative O(1) space；複雜度措辭 O(n) 應為 O(h)）→ 維持 2d |
 | 547 | Number of Provinces | M | Union Find | 2026-04-12 | ✅ | 2d | 2026-04-29 | 2026-04-27 SR 複習 ⚠️：3 個 UF template bug（find 用 == 漏 path compression、union by rank 比 leaf 而非 root、掛 leaf 而非 root），測資簡單沒爆出來 → 維持 2d。Template 肌肉記憶仍未穩固 |
