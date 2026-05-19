@@ -41,17 +41,35 @@ Problem:
         - nums is sorted and rotated between 1 and n times.
 
 思路：
-    TODO（學生自己填；中文 OK）
+    將mid和r去比, 如果mid > r 就代表左側有序 所以留右側 l = mid+1
+    反之, 就會需要 r = mid
+    如果是用mid和l比,會在 [1, 2, 3] 切錯邊
+    nums[mid] vs nums[r]：
+    分支 1: 若 nums[mid] > nums[r] → min 在 __右__ 半邊 → l = __mid+1__
+    分支 2: 若 nums[mid] < nums[r] → min 在 __左__ 半邊 → r = __mid__
 
 複雜度：
-    Time: O(?)
-    Space: O(?)
+    Time: O(log(len(nums)))
+    Space: O(1)
 """
 
 
 class Solution:
     def findMin(self, nums: list[int]) -> int:
-        pass
+        n = len(nums)
+        l, r = 0, n-1
+        while l < r:
+            m = (l+r) // 2
+            # 左邊有排序
+            if nums[m] > nums[r]:
+                l = m+1
+            else: # 右邊有排序
+                r = m
+        return nums[l]
+    
+# A: (l, m, r) = (0, 2, 4) => (3, 3, 4) => (3, 3, 3)
+# B: (l, m, r) = (0, 1, 2) => (0, 0, 1) => (0, 0, 0)
+
 
 
 if __name__ == "__main__":
