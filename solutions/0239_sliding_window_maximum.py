@@ -1,14 +1,47 @@
 """
 LeetCode 239. Sliding Window Maximum
 Difficulty: Hard
-Tags: Array, Queue, Sliding Window, Monotonic Queue
+Tags: Array
 URL: https://leetcode.com/problems/sliding-window-maximum/
 
-思路：
-    透過 Monotonics queue 快速查找視窗內的最大值
+Problem:
+    You are given an array of integers nums, there is a sliding window of size k
+    which is moving from the very left of the array to the very right. You can
+    only see the k numbers in the window. Each time the sliding window moves
+    right by one position.
 
+    Return the max sliding window.
+
+    Example 1:
+        Input: nums = [1,3,-1,-3,5,3,6,7], k = 3
+        Output: [3,3,5,5,6,7]
+        Explanation:
+            Window position                Max
+            ---------------               -----
+            [1  3  -1] -3  5  3  6  7       3
+             1 [3  -1  -3] 5  3  6  7       3
+             1  3 [-1  -3  5] 3  6  7       5
+             1  3  -1 [-3  5  3] 6  7       5
+             1  3  -1  -3 [5  3  6] 7       6
+             1  3  -1  -3  5 [3  6  7]      7
+
+    Example 2:
+        Input: nums = [1], k = 1
+        Output: [1]
+
+    Constraints:
+        - 1 <= nums.length <= 10^5
+        - -10^4 <= nums[i] <= 10^4
+        - 1 <= k <= nums.length
+
+思路：
+    先準備一個遞減的 monotonic queue：
+Deque 內的元素滿足：(1) nums[index] 單調遞減，(2) 所有 index 都在 [i-k+1, i] 內。
+1. 每當進入新視窗時，先檢查第一個元素是否還在窗內，如果不在的話就執行 popleft
+2. 檢查佇列末端的元素一定要比新元素大，否則就持續 pop 最後一個元素，直到 queue 為空或是滿足條件為止
+3. 檢查完成之後，就抓取這個 queue 裡面的第一個，即為 temporary 的 maximum。
 複雜度：
-    Time: O(N)
+    Time: O(n)
     Space: O(k)
 """
 from collections import deque
@@ -16,27 +49,21 @@ from collections import deque
 
 class Solution:
     def maxSlidingWindow(self, nums: list[int], k: int) -> list[int]:
-        queue = deque([])
-
-        for idx in range(k):
-            while queue and queue[-1][0] < nums[idx]:
-                queue.pop()
-            queue.append([nums[idx], idx])
-        
-        ans = []
+        monoQueue = deque([])
         n = len(nums)
-        for idx in range(len(nums)-k+1):
-            while idx > queue[0][1]:
-                queue.popleft()
-            
-            ans.append(queue[0][0])
 
-            if idx+k < n:
-                num = nums[idx+k]
-                while queue and queue[-1][0] < num:
-                    queue.pop()
-                queue.append([num, idx+k])
-        
+        ans = [0] * (n-k+1)
+        # start loop
+        for i in range(n):
+            left = i-k+1
+            if monoQueue and monoQueue[0] < left:
+                monoQueue.popleft()
+            while monoQueue and nums[monoQueue[-1]] < nums[i]:
+                monoQueue.pop()
+            monoQueue.append(i)
+            if left >= 0:
+                ans[left] = nums[monoQueue[0]]
+                
         return ans
 
 
@@ -57,5 +84,11 @@ if __name__ == "__main__":
 
     # Test case 5: increasing array
     assert s.maxSlidingWindow([1,2,3,4,5], 3) == [3,4,5], "Case 5: increasing"
+
+    # Test case 6: duplicates
+    assert s.maxSlidingWindow([1,1,1,1], 2) == [1,1,1], "Case 6: all duplicates"
+
+    # Test case 7: k=1 (window of size 1)
+    assert s.maxSlidingWindow([4,2,7,1,5], 1) == [4,2,7,1,5], "Case 7: k=1"
 
     print("All tests passed!")
