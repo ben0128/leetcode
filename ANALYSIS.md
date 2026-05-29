@@ -84,7 +84,7 @@
 | DP (Knapsack) | 3 | ⚠️✅ | 2d | **weak** | 322 Coin Change ✅ 首次 unbounded knapsack（Plan #5 #3）；partition-equal-subset-sum 5 次；題數仍偏少需鞏固（518 對照 loop order 待做） |
 | Sliding Window | 1 | ✅— | 2d | **weak** | 76 Min Window Substring ✅ 首次（Plan #5 #5，Hard ~35 min 達標）；題數<3，需鞏固（209/3/424 待做） |
 | Hash + Prefix Sum | 1 | ⚠️— | 2d | **weak** | 560 Subarray Sum K ⚠️ 首次（Plan #5 #4）；Code 用了多餘 prefix array，思路偏薄；題數<3 |
-| Heap | 3+ | ✅⚠️ | 2d | **weak** | top-k / kth-largest 早期 5-6 次；295 最近 ✅ |
+| Heap | 4+ | ✅⚠️ | 2d | **weak** | 23 Merge k Lists ⚠️（heap+LL Hard 首次；code 最乾淨但 Python comparison 坑需助教提 + 思路/test 紀律缺口）；973 ✅；top-k / kth-largest 早期 5-6 次 |
 | Monotonic Queue | 1 | ⚠️— | 2d | **weak** | 題數<3；239 首次接觸有 2 個實作 bug |
 | Segment Tree / BIT | 0 | — | — | **gap** | 零覆蓋 |
 | 進階 Design | 0 | — | — | **gap** | LFU / Iterator / Rate Limiter 未練 |
@@ -181,6 +181,34 @@
 ## 六、讀書計畫紀錄
 
 > 每完成一份 5 題讀書計畫後，紀錄在此。用 `/study` 生成新計畫。
+
+> ⚠️ Plan #5、#6 的摘要尚未回填到此 section（計畫檔在 `study/`，逐題結果在 `review/schedule.md`）。下次有空可補。
+
+### Plan #7 — 2026-05-24 ~ 2026-05-30
+主題重點：Sliding Window 鞏固、Hash+Prefix Sum 鞏固、DP 2D SR（39 天 overdue）、DFS Cycle Detection gap、Heap+LL Hard
+
+| # | 題目 | 結果 | 花費時間 | 筆記 |
+|---|------|------|----------|------|
+| 1 | 3. Longest Substring Without Repeating Characters | ✅ | ~15 min | Sliding window last-seen-index variant 首次。4-段 forcing function **起作用**（被 push 後補完兩條 clean invariant）。「abba」stale-index trap 一發點破。Code 風格選 clever-over-defensive（Plan #8 起預設選 defensive）|
+| 2 | 525. Contiguous Array | ⚠️ | ~30 min | Hash+Prefix 第 2 題。±1 transform 即答，但中段卡 hashmap value 語意（index vs count），4 步 Socratic 才補。4-段被 push。**Catch 助教 Space 錯誤 ✓** |
+| 3 | 97. Interleaving String (SR) | ⚠️ | ~25 min | 39 天 overdue SR 重做。**vs Plan #1「邊界需引導」明顯進步**（自己起頭 + swap-to-shorter + 1D 滾動）。Q4 O(min) 優化卡、Q5 overlapping subproblems 講不出病因（已存記憶 quiz）。4-段半破（只貼 Section 1）|
+| 4 | 210. Course Schedule II | ⚠️ | ~40 min | DFS 3-color cycle detection gap 首次（補 P1 #7）。思路 4 段**大進步**。但 code 加 in-degree 機關致不相連環漏判 bug + 假 pass。**test 紀律連 4 次未加 regression**。post-order vs pre-order 用反例講通 → notes 新增 |
+| 5 | 23. Merge k Sorted Lists | ⚠️ | ~30 min | Heap+LL Hard 首次。**Code 全場最乾淨**（node-in-tuple + idx tie-break + dummy head one-pass）。Python comparison 坑需助教提。**思路與 code 不符（兩個 vs 三個元素，Plan #4 124 重演）+ test 紀律連 5 次**。沒提 divide & conquer |
+
+**整體觀察：**
+- **結果 ✅⚠️⚠️⚠️⚠️**（1 ✅ + 4 ⚠️）。每題都有需引導點，挑戰度拉對。
+- **4-段思路 forcing function（本 plan 新規則）效果分層**：#1 起作用、#2 #3 被 push、#4 大進步（一開口 edge 方向 + 三色 invariant）、#5 思路與 code 不符。整體**比 Plan #4/#6 的「思路偏薄」進步**——forcing function 把問題從「事後提醒」變「事前 gate」，但仍需助教 push 才完整，未內化成自動行為。
+- **🔴 新浮現的最大弱項：test 紀律**。#210 與 #23 共 ~5 次「明確要求自己加 test 卻不加 / 加錯」。延續 ANALYSIS 既有的 **trace 紀律**弱項（#33/#322/#560），現在擴大為「**寫前不主動想『哪個 input 打爆我』**」。#210 的 in-degree bug 正是因為沒有 disconnected-cycle 測試而被「All tests passed!」假 pass 掩蓋。
+- **思路與 code 不符**（#23）是 Plan #4 (124) 就點過的老問題重演——口述/書寫精準度在壓力下仍會鬆。
+- **新建心智模型**：±1 transform（#525）、**DFS 3-color cycle detection + post-order/reverse 拓撲序**（#210，`notes/dfs_topological_sort.md` 新增，含 pre-order 反例）、heap-of-k merge + Python tuple comparison 坑（#23）。
+- **SR 里程碑**：#97 積壓 39 天終於重做，且明顯進步。但 SR backlog 仍在擴大（本 plan 又新增 #210 #23）。
+
+**下次建議加強：**
+- **🔴 把「自己寫 test」做成 forcing function（Plan #8 最高優先）**：比照 4-段思路，把「寫前先口述『哪個 edge case 會打爆我』+ 寫完前必須有 ≥1 個自己加的 assert」設成**事前 + 事後雙 gate**。光靠事後提醒已證明連 5 次無效。
+- **思路一寫就跟 code 對齊**：tuple 幾個元素、return type、變數作用域——寫完回頭比對思路與 code（Plan #4 已建議、#23 仍犯）。
+- **Code 風格預設 defensive**（Plan #8 起）：#1 的 clever max-placement 之後預設選標準寫法。
+- **SR backlog 處理**：26+ → 更多。認真考慮 plan #7 筆記提的三個選項（SR-only 短 plan / 拉長槽位 / 30d-overdue 自動退階）。
+- **轉 /mock 測壓力**：多題超時間目標（#2 #4），且 forcing function 在無人 push 時是否仍成立未知——mock 模式可驗證。
 
 ### Plan #4 — 2026-05-01 ~ 2026-05-05
 主題重點：BST inorder 鞏固、Heap 經典、Graph topo sort 新 pattern、DP 經典、Tree Hard 挑戰

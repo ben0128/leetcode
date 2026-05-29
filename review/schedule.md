@@ -43,6 +43,8 @@
 
 | 210 | Course Schedule II | M | Graph / DFS Topo Sort | 2026-05-30 | ⚠️ | 2d | 2026-06-01 | Plan #7 #4。**DFS 3-color cycle detection gap 首次**（#207 用 Kahn's BFS，這次強制 DFS）。思路 4 段大進步（edge 方向 / 三色 invariant / 不能合併 visited / O(n+m) 全對），cycle 偵測 insight（碰灰=back edge=環）一次命中。**但 code 真 bug**：多加 in-degree 預處理 → DFS 只從入度 0 起跑 → 環裡 node 入度恆 ≥1 → 不相連的環漏判（case A `[[1,2],[2,1]]` 回 `[0]` 應 `[]`；純環回 `[]` 僥倖）。"All tests passed!" 假 pass 再現（同 #33）。Socratic 引導拿掉 in-degree 機關改「for 每個 white node → dfs」修好。length check 自判 dead code 並移除 ✓。**🔴 test 紀律重大缺口**：要求加 regression test 連續 4 次未加，助教代加。post-order+reverse vs pre-order「會寫講不出」用 `0→2`/`1→2` 反例講通 → notes/dfs_topological_sort.md。維持 2d。SR 重做要點：(1) 外層 loop 從每個 white node 起，不加 in-degree 機關 (2) 自己加 regression test（環在獨立 component）不等被點名 (3) invariant 寫狀態不寫步驟 (4) 開口講 post-order+reverse 因果（黑=下游就位）(5) edge 方向↔reverse 綁死先定死 |
 
+| 23 | Merge k Sorted Lists | H | Heap / Linked List | 2026-05-30 | ⚠️ | 2d | 2026-06-01 | Plan #7 #5。**Heap + Linked List Hard 首次**。Code 全場最乾淨：node-in-tuple `(val, idx, node)`、idx tie-breaker、`n.next` 推進、one-pass dummy head，一次過。Brute force O(N·k) 對，heap 優化自己提出。**Python comparison 坑需助教主動提**（原要 push `(val, node)`，被問「val 相等會怎樣」才加 index 防比 ListNode）。Invariant 後半追問才補。**🔴 思路與 code 不符（Plan #4 124 重演）**：寫 tuple「兩個」code 卻三個，點名後先改別句跳過、二次才改對。**🔴 test 紀律連 5 次缺口**：要求自己加打爆 heap 的 case，先沒加 → 加 redundant mixed-empty → 把 assert 整行給他才貼 all-equal case。沒提 divide & conquer。維持 2d。SR 重做要點：(1) 思路寫就跟 code 對齊（tuple 幾元素 / idx 幹嘛）(2) 寫前主動想「哪個 input 打爆我」寫成 assert (3) Python heap 不能比物件 → tuple 純 int 或加 unique tie-break 開口直接講 (4) 補 divide & conquer 兩兩合併解法 |
+
 ## Mastered（通過 32d 複習後結業）
 
 | # | 題目 | 結業日期 | 總複習次數 |
