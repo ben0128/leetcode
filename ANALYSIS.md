@@ -77,7 +77,7 @@
 | Trees (general) | 19+ | ⚠️⚠️ | 2d | **weak** | 236 LCA ⚠️（第一版漏遞迴右子樹）；94 ⚠️ |
 | BST | 3 | ⚠️✅ | 2d | **weak** | 230 Kth ⚠️；歷史 LCA 沒用 BST 性質 O(h) |
 | Backtracking | 12+ | ✅✅ | — | proficient | subsets/permutations/combinations 全覆蓋 |
-| Graph BFS/DFS | 15+ | ⚠️✅ | 2d | **weak** | 127 首次 Hard BFS ⚠️（BFS/wildcard 提示 + 複雜度漏算 slice cost）；14+ 題基礎仍在 |
+| Graph BFS/DFS | 16+ | ✅⚠️ | 2d | **weak** | 210 Course Schedule II ⚠️（DFS 3-color cycle detection 首次，補 ANALYSIS P1 #7 gap；思路 4 段大進步但 code 加 in-degree 機關致不相連環漏判 + test 紀律連 4 次未加 regression）；863 ✅ Tree→Graph BFS；127 首次 Hard BFS ⚠️ |
 | Union Find | 3 | ⚠️⚠️ | 2d | **weak** | 547 SR ⚠️（template 3 bug）+ 721 ⚠️（斷鏈 bug + 跨行 union 機制講不出）；UF template 肌肉記憶 + 「搬祖宗」union 寫法仍未穩固 |
 | DP (1D) | 6 | ⚠️— | 2d | **weak** | house-robber 8 次；1235 weighted interval scheduling ⚠️（DP+BS hybrid，dp 偏移 1 沒貫徹） |
 | DP (2D) | 2 | ⚠️⚠️ | 2d | **weak** | 64 ⚠️ 實作對但講不出「為什麼 1D work」；97 ⚠️ 邊界需引導 |
