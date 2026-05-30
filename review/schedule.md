@@ -45,6 +45,8 @@
 
 | 23 | Merge k Sorted Lists | H | Heap / Linked List | 2026-05-30 | ⚠️ | 2d | 2026-06-01 | Plan #7 #5。**Heap + Linked List Hard 首次**。Code 全場最乾淨：node-in-tuple `(val, idx, node)`、idx tie-breaker、`n.next` 推進、one-pass dummy head，一次過。Brute force O(N·k) 對，heap 優化自己提出。**Python comparison 坑需助教主動提**（原要 push `(val, node)`，被問「val 相等會怎樣」才加 index 防比 ListNode）。Invariant 後半追問才補。**🔴 思路與 code 不符（Plan #4 124 重演）**：寫 tuple「兩個」code 卻三個，點名後先改別句跳過、二次才改對。**🔴 test 紀律連 5 次缺口**：要求自己加打爆 heap 的 case，先沒加 → 加 redundant mixed-empty → 把 assert 整行給他才貼 all-equal case。沒提 divide & conquer。維持 2d。SR 重做要點：(1) 思路寫就跟 code 對齊（tuple 幾元素 / idx 幹嘛）(2) 寫前主動想「哪個 input 打爆我」寫成 assert (3) Python heap 不能比物件 → tuple 純 int 或加 unique tie-break 開口直接講 (4) 補 divide & conquer 兩兩合併解法 |
 
+| 56 | Merge Intervals | M | Array / Intervals | 2026-05-30 | ⚠️ | 2d | 2026-06-01 | Plan #8 #1。**Intervals pattern 首次**。Code 乾淨一次過（sort + `start<=currEnd` 碰端點 + `max()` nested）。初版 merge misconception（拿「第一個 end」固定值比），`[[1,5],[2,3],[4,8],[6,7]]` 反例修成 running-max。進步：BS 行不通自己推通（end 會長大）+ **自己加 nested test（Plan #7 拒絕 5 次後首次，事後 gate 過）**。仍 ⚠️：Section 3 invariant 被 push 才補 + 事前 gate 跳過。維持 2d。SR 重做要點：(1) 開口 4 段含 invariant「currEnd=當前 cluster max end」(2) 事前 gate 先講 touching `[[1,4],[4,5]]` + nested `[[1,8],[2,6]]` 會爆的 case (3) `start<=currEnd` vs `<` 差別口頭講 |
+
 ## Mastered（通過 32d 複習後結業）
 
 | # | 題目 | 結業日期 | 總複習次數 |

@@ -82,8 +82,8 @@
 | DP (1D) | 6 | ⚠️— | 2d | **weak** | house-robber 8 次；1235 weighted interval scheduling ⚠️（DP+BS hybrid，dp 偏移 1 沒貫徹） |
 | DP (2D) | 2 | ⚠️⚠️ | 2d | **weak** | 64 ⚠️ 實作對但講不出「為什麼 1D work」；97 ⚠️ 邊界需引導 |
 | DP (Knapsack) | 3 | ⚠️✅ | 2d | **weak** | 322 Coin Change ✅ 首次 unbounded knapsack（Plan #5 #3）；partition-equal-subset-sum 5 次；題數仍偏少需鞏固（518 對照 loop order 待做） |
-| Sliding Window | 1 | ✅— | 2d | **weak** | 76 Min Window Substring ✅ 首次（Plan #5 #5，Hard ~35 min 達標）；題數<3，需鞏固（209/3/424 待做） |
-| Hash + Prefix Sum | 1 | ⚠️— | 2d | **weak** | 560 Subarray Sum K ⚠️ 首次（Plan #5 #4）；Code 用了多餘 prefix array，思路偏薄；題數<3 |
+| Sliding Window | 2 | ✅✅ | 2d | **weak** | 3 Longest Substring ✅（Plan #7 #1，last-seen-index variant）+ 76 Min Window ✅（Hard）；題數<3 仍需鞏固（209/424 待做） |
+| Hash + Prefix Sum | 2 | ⚠️⚠️ | 2d | **weak** | 525 Contiguous Array ⚠️（Plan #7 #2，±1 transform；hashmap value=index 語意卡）+ 560 Subarray Sum K ⚠️（value=count）；題數<3 |
 | Heap | 4+ | ✅⚠️ | 2d | **weak** | 23 Merge k Lists ⚠️（heap+LL Hard 首次；code 最乾淨但 Python comparison 坑需助教提 + 思路/test 紀律缺口）；973 ✅；top-k / kth-largest 早期 5-6 次 |
 | Monotonic Queue | 1 | ⚠️— | 2d | **weak** | 題數<3；239 首次接觸有 2 個實作 bug |
 | Segment Tree / BIT | 0 | — | — | **gap** | 零覆蓋 |
