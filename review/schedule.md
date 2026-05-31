@@ -47,6 +47,8 @@
 
 | 56 | Merge Intervals | M | Array / Intervals | 2026-05-30 | ⚠️ | 2d | 2026-06-01 | Plan #8 #1。**Intervals pattern 首次**。Code 乾淨一次過（sort + `start<=currEnd` 碰端點 + `max()` nested）。初版 merge misconception（拿「第一個 end」固定值比），`[[1,5],[2,3],[4,8],[6,7]]` 反例修成 running-max。進步：BS 行不通自己推通（end 會長大）+ **自己加 nested test（Plan #7 拒絕 5 次後首次，事後 gate 過）**。仍 ⚠️：Section 3 invariant 被 push 才補 + 事前 gate 跳過。維持 2d。SR 重做要點：(1) 開口 4 段含 invariant「currEnd=當前 cluster max end」(2) 事前 gate 先講 touching `[[1,4],[4,5]]` + nested `[[1,8],[2,6]]` 會爆的 case (3) `start<=currEnd` vs `<` 差別口頭講 |
 
+| 875 | Koko Eating Bananas | M | Binary Search (on answer) | 2026-05-30 | ⚠️ | 2d | 2026-06-01 | Plan #8 #2。**BS-on-answer 新子類首次**。Code 乾淨一次過（Template A `l<r`/`r=m`、ceiling `(p+m-1)//m`、`return l`）。核心 insight 自己講對：二分對象 = 速度空間 [1,max] 不是陣列。需糾正：monotonicity「保證 vs 有機會」（更快**必定**可行→連續後綴→BS 命門）；ceiling 沒主動講需提示（`//` 在 `[3,6,7,11] k=4` 算 0 小時）。gate 連續被 push：invariant chat 講對但沒寫檔案需再點名；事後 gate 先跳過二次才加自己的非整除 test `[7],2==4`；事前 gate 講了 len==h 但 case 全整除驗不出 bug。維持 2d。SR 重做要點：(1) 開口「二分速度空間 + 更快必定可行（連續後綴）」(2) ceiling 主動講 (3) invariant 一講就寫檔案 (4) 事後 gate 自己加非整除 test (5) 事前 gate 選非整除 case 非 len==h |
+
 ## Mastered（通過 32d 複習後結業）
 
 | # | 題目 | 結業日期 | 總複習次數 |
