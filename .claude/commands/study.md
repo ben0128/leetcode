@@ -10,6 +10,14 @@ Optional argument for topic focus: $ARGUMENTS
 
 ## Steps
 
+0. **Mock cadence 檢查（生成新計畫前先做；見 CLAUDE.md「Mock 節奏」）**
+   - 讀 `mock/` 取最新一場 mock 日期（檔名 `mock_{nn}_{YYYY-MM-DD}.md`）；讀 `study/` 數已完成的計畫數
+   - 觸發條件（任一）：從未做過 mock／距上次 mock ≥ 2 份完成計畫／距上次 mock ≥ 21 天
+   - 觸發時 **預設先跑一場 `/mock` 再開新計畫**，這樣問學生：
+     > 「你已 {N} 份 plan／{D} 天沒做限時 mock 了。距面試還遠，mock 當定期體檢——先跑一場 45 分鐘限時 mock 再開新計畫?（可回「跳過」直接開計畫）」
+   - 學生明確跳過才繼續本流程；否則轉 `/mock`（體檢題從**已練過的主題**抽，量壓力下的真實水平）
+   - 此 gate **只在生成新計畫時觸發**，不阻擋「計畫進行中繼續做下一題」
+
 1. **讀取歷史紀錄並校正熟練度表**
    - Read `./ANALYSIS.md` — 關注「主題熟練度總表」（量化等級）為主，「質性分析」僅供備註參考
    - Read all existing files in `./study/` to determine the next plan number and avoid repeating already-completed problems
@@ -23,11 +31,20 @@ Optional argument for topic focus: $ARGUMENTS
 
 3. **設計 5 題計畫**，遵守以下規則：
 
-### Plan Design — 題目組成（5 題固定結構）
+### Plan Design — SR backlog 自適應（review 槽位隨積壓擴張，讓佇列能真正清空）
+先讀 `review/schedule.md` Active 表，數 `下次日期 ≤ 今天` 的 **due 題數**，決定本份結構：
+- **due ≤ 4**：正常結構（1 review 槽，見下方「題目組成」）
+- **due 5–11**：**2 個 review 槽**（吃掉 wildcard 槽）；選最久未複習的 2 題（原題重做）
+- **due ≥ 12**：**這份計畫 = SR-burndown**——5 題全選 due 題（最久未複習優先，overdue > 30 天排最前），不出新題。**最多連續 1 份**：下一份即使仍 ≥ 12 也回正常結構，避免完全停掉新主題學習
+- review 題一律以**原題**重做（SR 核心就是重做同一題，不換題）
+
+> 為什麼：1 review 槽/計畫 服務不了「2d 題每 2 天就重新 due」的排程 → backlog 只進不出（目前已 30+ due、Mastered 空）。槽位隨積壓擴張 + `schedule.md` 收緊入列 + outcome 升階，三者一起讓佇列收斂。
+
+### Plan Design — 題目組成（due ≤ 4 的正常結構；5 題）
 - **2 題 weak**：從 `ANALYSIS.md` 的「主題熟練度總表」中挑 `等級 ∈ {weak}` 的主題，再選具體題目
   - 若多個 weak 主題可選 → 優先選**最近計畫中沒出現過的**（配合 interleaving）
   - 具體題目優先從 `GOOGLE_QUESTIONS.md` 該主題分類下挑選（若無則 NeetCode / LeetCode pattern 常見題）
-- **1 題 review (SR)**：從 `review/schedule.md` Active 表中選一個 due 的項目（`下次日期 ≤ 今天`）；有多項則取最早 due 的。複習題以**原題**出現，不換題（間隔重複的核心就是重做同一題）。若當天無 due 項目 → fallback：從 `study/` 歷史 ⚠️ 題目挑同主題變體題
+- **1（或 2）題 review (SR)**：槽位數依上方「SR backlog 自適應」。從 `review/schedule.md` Active 表選 due 項目（`下次日期 ≤ 今天`），取最早 due 的（overdue > 30 天優先）。複習題以**原題**出現，不換題（間隔重複的核心就是重做同一題）。若當天無 due 項目 → fallback：從 `study/` 歷史 ⚠️ 題目挑同主題變體題
 - **1 題 Google 校準**：從 `GOOGLE_QUESTIONS.md` 挑一題未做過的 🔥🔥🔥，維持對當前 Google 題風的敏感度
 - **1 題 wildcard**：優先挑 `等級 = gap` 的主題做新主題暖身；若所有 gap 主題本輪不適合（例如 Google 低頻的 Segment Tree / Math），改為 hard 挑戰
 
@@ -75,16 +92,17 @@ Optional argument for topic focus: $ARGUMENTS
 6. **問學生要從哪題開始**，然後以 `/practice` 助教模式引導該題：
    - Create the solution file per the `problem-file-setup` skill at `.claude/skills/problem-file-setup/SKILL.md`
    - Follow the full practice flow (approach discussion → coding → optimize → teach back → follow-up → timing)
+   - **常駐 forcing functions（4-段思路 / test 雙 gate / defensive 預設）由 `practice.md` 擁有**——plan 檔不要再重抄這些散文，只記**本計畫特定**的加強重點（例如某主題的 SR 重做要點）
    - After solving, commit the solution file
 
 7. **每完成一題，立即更新兩個檔案**：
    - `study/plan_{nn}_{YYYY-MM-DD}.md` 的進度欄位：
-     - 結果：✅ = 獨立解出最優解 / ⚠️ = 需要提示或非最優 / ❌ = 無法解出
+     - 結果：依 CLAUDE.md「結果評分標準」單一定義（措辭 nudge=✅；概念 hint／bug／次優／超時／破 gate=⚠️；需實質協助=❌）
      - 花費時間（實際分鐘數）
      - 筆記（掙扎點或收穫）
    - `review/schedule.md` 依 Update Protocol 維護：
-     - **新題**（不在 Active 中）：符合「排程納入規則」（⚠️/❌/Hard ✅/新主題 ✅）→ append 到 Active，階段=2d，下次日期=今天+2
-     - **SR 複習題**（原本在 Active 中）：依本次結果（✅→進階段 / ⚠️→維持 / ❌→重置 2d）更新該列；若從 32d ✅ 通過 → 移到 Mastered 區塊
+     - **新題**（不在 Active 中）：符合收緊後「排程納入規則」（❌／實質掙扎 ⚠️／Hard pass／新主題首次 pass；單純小 nudge 且時間內寫對 → 不入）→ append 到 Active，階段=2d，下次日期=今天+2
+     - **SR 複習題**（原本在 Active 中）：依 **outcome** 升降（Pass→進階段 / Weak pass→維持 / Fail→重置 2d），**不看 ✅/⚠️ label**；若從 32d Pass → 移到 Mastered 區塊
 
 8. **全部 5 題完成後**，append 摘要到 `./ANALYSIS.md` 的「讀書計畫紀錄」section：
 

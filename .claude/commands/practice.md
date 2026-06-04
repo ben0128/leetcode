@@ -25,14 +25,24 @@ If no problem is specified, ask the user which problem they'd like to practice.
 6. Create the solution file per the `problem-file-setup` skill at `.claude/skills/problem-file-setup/SKILL.md` (owns filename convention, location, and full template with English Problem block)
 7. **記錄開始時間**：`**開始時間：{HH:MM}**`
 
+## 常駐 Forcing Functions（每題都套用，不分是否在計畫內）
+
+> 來源：Plan #7／#8 反覆弱項（思路偏薄、test 紀律連 5 次缺口、思路與 code 不符），已從 plan 散文**固化於此**，不再每份 plan 重抄。違反任一 gate → 該題**自動 ⚠️**（評分定義見 CLAUDE.md「結果評分標準」）。
+
+1. **思路 4-段強制（code 前）**：① 演算法骨架 ② 資料結構 + 為什麼 ③ Invariant（寫**狀態**，不是步驟）④ 複雜度。未滿 4 段 → 不准動 code。思路寫完**回頭對 code**（tuple 幾個元素／return type／變數作用域——#23「寫兩元素 code 卻三個」的重演要當場擋）。
+2. **test 雙 gate**：
+   - **事前**（code 前）：口述「哪個 input 最可能打爆我的解法」≥ 1 個，且要選**驗得出 bug** 的 case（非整除、touching／nested 邊界、空輸入、單元素、重複值…），不是隨便一個 happy path。講不出 → 不准開始寫。
+   - **事後**（宣告 done 前）：檔案 test 區必須有 ≥ 1 個**學生自己想**的 assert（非助教預填、非 redundant 變體）。沒有 → 打回，不算完成。
+3. **Code 風格預設 defensive**：標準寫法優先；clever／省行寫法要能講出為什麼安全才採用。
+
 ## Practice Flow
 
 ### Phase 1 — Approach Discussion（先講再寫）
 1. Student describes their initial thoughts
-2. **要求學生口述思路和預估的時間/空間複雜度**，才能開始寫 code
-   - 如果學生直接想寫 code → 提醒：「先說說你的思路和預估的複雜度」
+2. **要求學生口述 4-段思路（見上方 forcing function 1）+ 預估時間/空間複雜度**，才能開始寫 code
+   - 如果學生直接想寫 code → 提醒：「先講完整 4 段思路 + 複雜度，並做 test 事前 gate」
    - 思路有問題 → 用漸進提示引導（見下方層級）
-   - 思路正確 → 「思路沒問題，去寫吧」
+   - 思路正確且 4 段完整 + 事前 gate 過 → 「思路沒問題，去寫吧」
 3. Progressive hints (from shallow to deep):
    - Level 1: Ask what they've thought about so far
    - Level 2: Suggest a data structure or algorithm category
@@ -42,6 +52,7 @@ If no problem is specified, ask the user which problem they'd like to practice.
 
 ### Phase 2 — Coding
 4. Student writes code locally; run `python {file}` to test
+   - **宣告 done 前先過 test 事後 gate**（forcing function 2）：檔案裡要有 ≥ 1 個學生自己加、且驗得出 bug 的 assert，否則打回
 
 ### Phase 3 — Optimize & Deepen（tests pass 之後）
 5. **主動分析優化空間**再讓學生繼續：
@@ -67,13 +78,13 @@ If no problem is specified, ask the user which problem they'd like to practice.
 ## Update Progress
 
 - If this problem is part of an active study plan in `./study/`, update that plan file's progress:
-  - Result: ✅ (solved optimally without help) / ⚠️ (needed hints or suboptimal) / ❌ (could not solve)
+  - Result：依 CLAUDE.md「結果評分標準」單一定義判 ✅/⚠️/❌（措辭 nudge=✅；概念 hint／bug／次優／超時／破 gate=⚠️；需實質協助=❌）
   - Time spent (actual minutes)
   - Notes (what they struggled with or learned)
-- Update `./review/schedule.md` (see the Update Protocol and 排程納入規則 in that file):
-  - **SR revisit**（Setup step 4 中辨識為 Active 中的原題）：依結果更新該列 — ✅ 進下一階段 / ⚠️ 維持階段 / ❌ 重置 2d；32d ✅ 通過 → 移到 Mastered
-  - **新題**：符合排程納入規則（⚠️/❌/Hard ✅/新主題 ✅）→ append 到 Active，階段=2d，下次日期=今天+2
-  - 熟練主題的 Medium ✅ → 不排程
+- Update `./review/schedule.md` (see the Update Protocol and 排程納入規則 in that file)：
+  - **SR revisit**（Setup step 4 中辨識為 Active 中的原題）：**依 outcome 升降階，不看 ✅/⚠️ label** — Pass（正確 + 達標時間，即使有小 nudge）進下一階段 / Weak pass（正確但超時/次優/多個概念 hint）維持階段 / Fail（❌ 或有未抓出 bug）重置 2d；32d Pass → 移到 Mastered
+  - **新題**：依該檔收緊後的排程納入規則（❌／實質掙扎 ⚠️／Hard pass／新主題首次 pass 才入；單純一兩個措辭/概念小 nudge 且時間內寫對 → 不入）→ append 到 Active，階段=2d，下次日期=今天+2
+  - 熟練主題乾淨 ✅ → 不排程
 - Update `./ANALYSIS.md` 主題熟練度總表（依該檔的「等級判定規則」）：
   - 「已解題數」+1
   - 「最近 2 題」欄位左移（舊的結果移出、本次結果填入右側）
