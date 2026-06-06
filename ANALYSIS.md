@@ -84,7 +84,7 @@
 | DP (Knapsack) | 3 | ⚠️✅ | 2d | **weak** | 322 Coin Change ✅ 首次 unbounded knapsack（Plan #5 #3）；partition-equal-subset-sum 5 次；題數仍偏少需鞏固（518 對照 loop order 待做） |
 | Sliding Window | 2 | ✅✅ | 2d | **weak** | 3 Longest Substring ✅（Plan #7 #1，last-seen-index variant）+ 76 Min Window ✅（Hard）；題數<3 仍需鞏固（209/424 待做） |
 | Hash + Prefix Sum | 2 | ⚠️⚠️ | 2d | **weak** | 525 Contiguous Array ⚠️（Plan #7 #2，±1 transform；hashmap value=index 語意卡）+ 560 Subarray Sum K ⚠️（value=count）；題數<3 |
-| Heap | 4+ | ✅⚠️ | 2d | **weak** | 23 Merge k Lists ⚠️（heap+LL Hard 首次；code 最乾淨但 Python comparison 坑需助教提 + 思路/test 紀律缺口）；973 ✅；top-k / kth-largest 早期 5-6 次 |
+| Heap | 4+ | ⚠️⚠️ | 2d | **weak** | 295 SR ⚠️（45 天 overdue 重做；骨架/heap 朝向/size rebalance retention 不錯，但**漏 order rebalance**，自己 trace `[5,1,10]` 抓回 + 事後 gate 真做到；invariant「差2」trigger 當 state、複雜度兩處不精確）；23 Merge k Lists ⚠️（heap+LL Hard；Python comparison 坑 + 思路/test 缺口）；973 ✅；top-k/kth-largest 早期 5-6 次 |
 | Monotonic Queue | 1 | ⚠️— | 2d | **weak** | 題數<3；239 首次接觸有 2 個實作 bug |
 | Segment Tree / BIT | 0 | — | — | **gap** | 零覆蓋 |
 | 進階 Design | 0 | — | — | **gap** | LFU / Iterator / Rate Limiter 未練 |
