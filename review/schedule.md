@@ -49,6 +49,8 @@
 
 | 875 | Koko Eating Bananas | M | Binary Search (on answer) | 2026-05-30 | ⚠️ | 2d | 2026-06-01 | Plan #8 #2。**BS-on-answer 新子類首次**。Code 乾淨一次過（Template A `l<r`/`r=m`、ceiling `(p+m-1)//m`、`return l`）。核心 insight 自己講對：二分對象 = 速度空間 [1,max] 不是陣列。需糾正：monotonicity「保證 vs 有機會」（更快**必定**可行→連續後綴→BS 命門）；ceiling 沒主動講需提示（`//` 在 `[3,6,7,11] k=4` 算 0 小時）。gate 連續被 push：invariant chat 講對但沒寫檔案需再點名；事後 gate 先跳過二次才加自己的非整除 test `[7],2==4`；事前 gate 講了 len==h 但 case 全整除驗不出 bug。維持 2d。SR 重做要點：(1) 開口「二分速度空間 + 更快必定可行（連續後綴）」(2) ceiling 主動講 (3) invariant 一講就寫檔案 (4) 事後 gate 自己加非整除 test (5) 事前 gate 選非整除 case 非 len==h |
 
+| 684 | Redundant Connection | M | Union Find | 2026-06-06 | ⚠️ | 2d | 2026-06-08 | Plan #8 #3。**UF chronic 弱項首次 find+union 兩個 canonical、零 547/721 bug**、early return、n+1 全對。需概念 nudge：(1) 沒看出「剛好一條 redundant」初版想覆蓋 ans → 引導改 early return (2) 複雜度初寫 O(n·h) 糾正 O(n·α(n)) (3) invariant 初版循環論證需 scaffold。**亮點：自己 review code 抓到 find 只壓 queried node 的盲點**（vs #23 相反），初版 find 非 canonical → 自改標準 path-halving。事後 gate 自加 `[[1,2],[1,3],[2,3],[1,4]]`（中間 redundant + node=n）。15 min。SR 重做要點：(1) 開口「剛好一條 redundant → 第一次同 root 直接 return」(2) 複雜度直接 O(n·α(n)) (3) invariant 講「同群 ⟺ 已有路徑相連」(4) find 直接 canonical path-halving (5) union 先 find 兩 root 防斷鏈 |
+
 ## Mastered（通過 32d 複習後結業）
 
 | # | 題目 | 結業日期 | 總複習次數 |

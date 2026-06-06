@@ -78,7 +78,7 @@
 | BST | 3 | ⚠️✅ | 2d | **weak** | 230 Kth ⚠️；歷史 LCA 沒用 BST 性質 O(h) |
 | Backtracking | 12+ | ✅✅ | — | proficient | subsets/permutations/combinations 全覆蓋 |
 | Graph BFS/DFS | 16+ | ✅⚠️ | 2d | **weak** | 210 Course Schedule II ⚠️（DFS 3-color cycle detection 首次，補 ANALYSIS P1 #7 gap；思路 4 段大進步但 code 加 in-degree 機關致不相連環漏判 + test 紀律連 4 次未加 regression）；863 ✅ Tree→Graph BFS；127 首次 Hard BFS ⚠️ |
-| Union Find | 3 | ⚠️⚠️ | 2d | **weak** | 547 SR ⚠️（template 3 bug）+ 721 ⚠️（斷鏈 bug + 跨行 union 機制講不出）；UF template 肌肉記憶 + 「搬祖宗」union 寫法仍未穩固 |
+| Union Find | 4 | ⚠️⚠️ | 2d | **weak** | 684 ⚠️ **首次 find+union 兩個 canonical、零 547/721 bug**（template 肌肉記憶大進步、自己抓到 find 壓縮盲點改 canonical）但仍需概念 nudge（exactly-one→early return / 複雜度 O(n·α) / invariant 循環）；721 ⚠️（斷鏈）；547 SR ⚠️（template 3 bug）。題數 4 + 近 2 題 ⚠️⚠️ → 仍 weak，但 **code 品質本次達標**（弱點已從「template bug」上移到「思路/優化精準度」）|
 | DP (1D) | 6 | ⚠️— | 2d | **weak** | house-robber 8 次；1235 weighted interval scheduling ⚠️（DP+BS hybrid，dp 偏移 1 沒貫徹） |
 | DP (2D) | 2 | ⚠️⚠️ | 2d | **weak** | 64 ⚠️ 實作對但講不出「為什麼 1D work」；97 ⚠️ 邊界需引導 |
 | DP (Knapsack) | 3 | ⚠️✅ | 2d | **weak** | 322 Coin Change ✅ 首次 unbounded knapsack（Plan #5 #3）；partition-equal-subset-sum 5 次；題數仍偏少需鞏固（518 對照 loop order 待做） |
