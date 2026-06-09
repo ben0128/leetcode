@@ -101,6 +101,18 @@
   - 2 = 接近但有明顯不足
   - 1 = 明顯低於預期
 
+### L4 真實 bar 校準（2025-2026 firsthand 面經；完整趨勢見 `GOOGLE_QUESTIONS.md` 的 📈 section）
+
+兩條直接影響評分與 follow-up，**所有模式都套用**（mock 用來打分、practice 用來挑戰）：
+
+1. **Code quality 是明確的 reject 理由——即使全對。** 「能跑 + 最優複雜度」只是地板；不模組化／一坨塞進單一 function／可讀性差／沒處理樣例沒給的 corner case，可以把一個三題全對的 L4 直接壓成 Lean Hire / hold（2025-06 firsthand 實例）。
+   - **Coding 評分**：correct-but-messy 最多 2 分，別因為「答案對」就給 3。要主動點出命名、拆函式、邊界處理。
+   - bar = production-ready、every corner case、主動 walk through code（即使沒被要求）。
+
+2. **Follow-up 評的是優化軌跡，不是第一版能跑。** Phase 6 給 follow-up 時，看的是學生**如何從 brute force 推進到最優**、對 hint 的反應、主動發現 duplicates / edge cases，而不只是最終有沒有寫出來。
+   - correct-but-slow（沒被推就停在次優）→ Lean Hire，可能沉掉整個 loop。
+   - 評分與回饋要明說軌跡：哪裡卡住、是不是要 nudge 才前進、有沒有自己想到 duplicate/rotation 這類追問。
+
 ---
 
 ## 模式二：練習模式（Practice）
