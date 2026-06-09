@@ -72,6 +72,7 @@
 |------|---------|----------|-----------|-----|------|
 | Array / Hashing | 30+ | ✅✅ | — | proficient | 基本功扎實；歷史 anagram/sudoku 有掙扎但已鞏固 |
 | Two Pointers | 8 | ✅✅ | — | proficient | 歷史 three-sum / palindrome 早期掙扎，最終 optimal |
+| Intervals | 2 | ⚠️⚠️ | 2d | **weak** | #56 Merge Intervals ⚠️（Plan #8，固定-end misconception → running-max）；#986 Interval List Intersections ⚠️（**mock #01**，雙指針 max/min 一次寫對且乾淨最優，但初版把 #56 merge 邏輯帶進來一 nudge 自修 + test 主動性仍缺）。題數<3 |
 | Stack / Monotonic Stack | 9+ | ⚠️✅ | 7d | **borderline** | 394 SR ✅ 大進步（iterative 三大卡點全解 + 自推 recursive index passing）；嵌套 parsing mental model 已建立 |
 | Binary Search | 10+ | ⚠️⚠️ | 2d | **weak** | 162 ⚠️ + 33 ⚠️⚠️（雙重邊界 bug：外側 `<` 漏邊界 + 過修 `m` 致 infinite loop；trace 紀律根本弱項）；BS template + invariant 仍未穩 |
 | Trees (general) | 19+ | ⚠️⚠️ | 2d | **weak** | 236 LCA ⚠️（第一版漏遞迴右子樹）；94 ⚠️ |

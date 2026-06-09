@@ -51,6 +51,8 @@
 
 | 684 | Redundant Connection | M | Union Find | 2026-06-06 | ⚠️ | 2d | 2026-06-08 | Plan #8 #3。**UF chronic 弱項首次 find+union 兩個 canonical、零 547/721 bug**、early return、n+1 全對。需概念 nudge：(1) 沒看出「剛好一條 redundant」初版想覆蓋 ans → 引導改 early return (2) 複雜度初寫 O(n·h) 糾正 O(n·α(n)) (3) invariant 初版循環論證需 scaffold。**亮點：自己 review code 抓到 find 只壓 queried node 的盲點**（vs #23 相反），初版 find 非 canonical → 自改標準 path-halving。事後 gate 自加 `[[1,2],[1,3],[2,3],[1,4]]`（中間 redundant + node=n）。15 min。SR 重做要點：(1) 開口「剛好一條 redundant → 第一次同 root 直接 return」(2) 複雜度直接 O(n·α(n)) (3) invariant 講「同群 ⟺ 已有路徑相連」(4) find 直接 canonical path-halving (5) union 先 find 兩 root 防斷鏈 |
 
+| 986 | Interval List Intersections | M | Array / Intervals / Two Pointers | 2026-06-09 | ⚠️ | 2d | 2026-06-11 | **mock #01（首場限時 mock）**。雙指針 max/min + advance-smaller-end 一次寫對、乾淨最優、O(m+n)。**初版 merge 汙染**（帶入 9 天前 #56「相鄰就合併」邏輯）→ 一個 nudge 自修「拆兩組」恢復快。**🔴 test 主動性缺口（無人 push 版）**：說「done」時未驗證、hand-trace 與加 test 皆被 push 才做；**但自加 case `[[1,2],[3,4]],[[2,3],[4,6]]→[[2,2],[3,3],[4,4]]` 品質極高**（觸碰端點單點交集，正中死穴，vs Plan #7/#8 拒加 test 是真實進步）。follow-up：k 組 O(N·k) 被 push 後自推、space aux/output 被問才分。SR 重做要點：(1) 寫前口述**事前 test gate**「觸碰端點 / 完全不重疊 / 一個大區間蓋對面多個」(2) space 開口分 aux O(1) vs 含 output O(m+n) (3) clarify 主動問「單點/觸碰端點算不算交集」(4) k 組 follow-up 開口直接 O(N·k) + 提 heap 降 O(N log k) |
+
 ## Mastered（通過 32d 複習後結業）
 
 | # | 題目 | 結業日期 | 總複習次數 |
