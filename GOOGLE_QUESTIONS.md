@@ -1,8 +1,24 @@
 # Google SWE 考古題題單
 
-> 來源：LeetCode Company Tags、Blind/TeamBlind 面試回報、NeetCode Roadmap、Grind 75、HackMNC 頻率數據
-> 更新日期：2026-04-13（已交叉驗證）
+> 來源：LeetCode Discuss 2024-2026 firsthand 面經、Blind、Reddit、一畝三分地、snehasishroy/liquidslr 頻率資料（2026-05 snapshot）、LeetCode Company Tags、NeetCode Roadmap、Grind 75
+> 更新日期：2026-06-08（workflow：6 源並行掃描 → 3 鏡頭對抗驗證 → 對照合成）
 > 頻率標記：🔥🔥🔥 = 極高頻 / 🔥🔥 = 高頻 / 🔥 = 常見
+>
+> ⚠️ 策展注意（2026-06-08 驗證結論）：Discuss 6185127「2024 合集」是無日期 title index（混 2018-2024）；krishnadey `google_6months.csv` 是 2020 快照。**只**出現在這兩處的題目不構成「近期高頻」證據——未來更新時別被這類來源灌水。
+
+---
+
+## 📈 2024-2026 面試趨勢（2026-06-08，dated firsthand 面經驗證）
+
+- **偽裝變體 > 原題**：onsite 題目包成現實故事（咖啡店選址 = multi-source BFS、F1 輪胎策略 = DP、cloud snapshot 刪除 = topo sort、10 秒 log 去重 = stream/window）。考的就是穿透故事做 pattern matching。
+- **Follow-up 驅動**：一題基底 + 2-3 個遞進 follow-up（記憶體清理、O(n²)→O(n)、duplicates、rotation）；評的是**優化軌跡和對 hint 的反應**，不是第一版能跑。
+- **Code quality 是明確 reject 理由**：2025-06 一位 L4 三題全對仍被 hold——「整坨塞一個 function、不模組化、可讀性差」。Bar = production-ready、every corner case、主動 walk through code；correct-but-slow → Lean Hire 也可能沉掉整個 loop。
+- **Graph 是 table stakes**：multi-source BFS、Kahn's topo sort、Dijkstra 變體、connected components 幾乎每個 2024-2026 L4/L5 loop 都出現（但 arrays/strings 仍是最大桶 ~35%，graph ~25%——別偏科）。
+- **Interval / line-sweep 反覆出現**：Range Module / My Calendar / Employee Free Time / Merge Intervals 一族，特別愛追問 **duplicates 和樣例沒給的 edge cases**。
+- **String parsing / 遞迴運算式求值**仍是 phone screen 主力題型（45 分鐘、自選語言，評乾淨遞迴 + edge cases）。
+- **Binary-search-on-answer（max-min/min-max）是上升 pattern**：#875、#410 出現在近 30 天頻率窗口。
+- **L4 loop 形態**：~3 coding + 1 Googlyness，**L4 無 system design**（L5 才有）；每輪有效 coding ~37 分鐘；部分 loop 出現純數學/機率輪；Googlyness 有實際權重。
+- **≥1 in-person round 回歸**（反 AI 作弊；Pichai 2025-02 town hall + 多家媒體確認）。2026 H2 起部分美國團隊試點 **AI-assisted code comprehension 輪**（用 Gemini 讀/debug/優化 codebase，評 prompt 與驗證能力）——firsthand 證據還薄，但過渡期兩種形式都要準備。
 
 ---
 
@@ -54,7 +70,7 @@
 | 468 | Validate IP Address | M | 🔥🔥 |
 | 678 | Valid Parenthesis String | M | 🔥🔥 |
 | 727 | Minimum Window Subsequence | H | 🔥🔥 |
-| 1153 | String Transforms Into Another String | H | 🔥🔥 |
+| 1153 | String Transforms Into Another String | H | 🔥（2020 快照高頻，2025-26 未見） |
 
 ## 3. Two Pointers / Sliding Window
 
@@ -156,6 +172,7 @@
 | 621 | Task Scheduler | M | 🔥🔥 |
 | 767 | Reorganize String | M | 🔥🔥 |
 | 1094 | Car Pooling | M | 🔥🔥 |
+| 759 | Employee Free Time | H | 🔥🔥（interval-merge 族，2025 onsite 主題） |
 
 ## 9. Graph (BFS / DFS / Topological Sort)
 
@@ -164,14 +181,15 @@
 | 127 | Word Ladder | H | 🔥🔥🔥 |
 | 200 | Number of Islands | M | 🔥🔥🔥 |
 | 207 | Course Schedule | M | 🔥🔥🔥 |
+| 210 | Course Schedule II | M | 🔥🔥🔥（2025 firsthand：Kahn's topo+BFS；topo 是最穩定出現的 graph core） |
 | 269 | Alien Dictionary | H | 🔥🔥🔥 |
 | 329 | Longest Increasing Path in a Matrix | H | 🔥🔥🔥 |
 | 399 | Evaluate Division | M | 🔥🔥🔥 |
 | 721 | Accounts Merge | M | 🔥🔥🔥 |
 | 863 | All Nodes Distance K in Binary Tree | M | 🔥🔥🔥 |
 | 994 | Rotting Oranges | M | 🔥🔥🔥 |
+| 778 | Swim in Rising Water | H | 🔥🔥🔥（2025 兩份 firsthand 變體：6701617、6846591） |
 | 133 | Clone Graph | M | 🔥🔥 |
-| 210 | Course Schedule II | M | 🔥🔥 |
 | 310 | Minimum Height Trees | M | 🔥🔥 |
 | 332 | Reconstruct Itinerary | H | 🔥🔥 |
 | 417 | Pacific Atlantic Water Flow | M | 🔥🔥 |
@@ -182,6 +200,7 @@
 | 787 | Cheapest Flights Within K Stops | M | 🔥🔥 |
 | 815 | Bus Routes | H | 🔥🔥 |
 | 1091 | Shortest Path in Binary Matrix | M | 🔥🔥 |
+| 2115 | Find All Possible Recipes from Given Supplies | M | 🔥🔥（disguised topo-sort 變體的代表原型） |
 
 ## 10. Union Find
 
@@ -220,6 +239,7 @@
 | 518 | Coin Change II | M | 🔥🔥 |
 | 688 | Knight Probability in Chessboard | M | 🔥🔥 |
 | 1143 | Longest Common Subsequence | M | 🔥🔥 |
+| 354 | Russian Doll Envelopes | H | 🔥（2024 L4 onsite 變體 box-stacking + rotation follow-up） |
 
 ## 12. Backtracking
 
@@ -241,7 +261,7 @@
 | # | 題目 | 難度 | 頻率 |
 |---|------|------|------|
 | 208 | Implement Trie (Prefix Tree) | M | 🔥🔥🔥 |
-| 642 | Design Search Autocomplete System | H | 🔥🔥🔥 |
+| 642 | Design Search Autocomplete System | H | 🔥（2020 快照高頻，2025-26 窗口未見；Trie/Design 經典參考） |
 | 211 | Design Add and Search Words Data Structure | M | 🔥🔥 |
 | 212 | Word Search II | H | 🔥🔥 |
 | 745 | Prefix and Suffix Search | H | 🔥🔥 |
@@ -256,8 +276,9 @@
 | 341 | Flatten Nested List Iterator | M | 🔥🔥🔥 |
 | 380 | Insert Delete GetRandom O(1) | M | 🔥🔥🔥 |
 | 588 | Design In-Memory File System | H | 🔥🔥🔥 |
-| 642 | Design Search Autocomplete System | H | 🔥🔥🔥 |
+| 642 | Design Search Autocomplete System | H | 🔥（2020 快照高頻，2025-26 窗口未見） |
 | 1146 | Snapshot Array | M | 🔥🔥🔥 |
+| 715 | Range Module | H | 🔥🔥（2025 兩份 firsthand：Mar onsite R2 + Oct Bangalore line-sweep） |
 | 359 | Logger Rate Limiter | E | 🔥🔥 |
 | 460 | LFU Cache | H | 🔥🔥 |
 | 895 | Maximum Frequency Stack | H | 🔥🔥 |
@@ -280,27 +301,21 @@
 
 ## 🎯 最高優先未完成題目（🔥🔥🔥 且未做過）
 
-> 已於 2026-04-13 交叉驗證（來源：HackMNC 頻率數據、LeetCode Wizard、Verve Top 30、LeetCode Discuss 2024-2025 面試回報）
+> 已於 2026-06-08 重新驗證並對齊（6 源 workflow 掃描 + 3 鏡頭驗證；剔除已完成：#127 #162 #236 #394 #721 #863 #1235；#642 因降級移出；#210 新升 🔥🔥🔥 但已完成、#778 新進 🔥🔥🔥 但已在 NeetCode 做過）
 
 | # | 題目 | 主題 | 難度 |
 |---|------|------|------|
 | 4 | Median of Two Sorted Arrays | Binary Search | H |
 | 68 | Text Justification | String | H |
-| 127 | Word Ladder | Graph/BFS | H |
-| 162 | Find Peak Element | Binary Search | M |
-| 236 | LCA of Binary Tree | Tree | M |
 | 283 | Move Zeroes | Two Pointers | E |
 | 341 | Flatten Nested List Iterator | Stack/Design | M |
 | 380 | Insert Delete GetRandom O(1) | Design | M |
-| 394 | Decode String | Stack/String | M |
 | 399 | Evaluate Division | Graph/UF | M |
 | 528 | Random Pick with Weight | Binary Search | M |
 | 588 | Design In-Memory File System | Design | H |
-| 642 | Design Search Autocomplete System | Trie/Design | H |
-| 721 | Accounts Merge | Union Find | M |
 | 844 | Backspace String Compare | String/Stack | E |
-| 863 | All Nodes Distance K in Binary Tree | Tree/Graph | M |
 | 938 | Range Sum of BST | Tree | E |
 | 951 | Flip Equivalent Binary Trees | Tree | M |
 | 1146 | Snapshot Array | Design | M |
-| 1235 | Maximum Profit in Job Scheduling | DP/Greedy | H |
+
+> 次優先（本次新進 🔥🔥、未做過、貼合 2025-26 interval/topo 趨勢）：#715 Range Module、#759 Employee Free Time、#2115 Find All Possible Recipes
