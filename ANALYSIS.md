@@ -76,7 +76,7 @@
 | Stack / Monotonic Stack | 9+ | ⚠️✅ | 7d | **borderline** | 394 SR ✅ 大進步（iterative 三大卡點全解 + 自推 recursive index passing）；嵌套 parsing mental model 已建立 |
 | Binary Search | 10+ | ⚠️⚠️ | 2d | **weak** | 162 ⚠️ + 33 ⚠️⚠️（雙重邊界 bug：外側 `<` 漏邊界 + 過修 `m` 致 infinite loop；trace 紀律根本弱項）；BS template + invariant 仍未穩 |
 | Trees (general) | 19+ | ⚠️⚠️ | 2d | **weak** | 236 LCA ⚠️（第一版漏遞迴右子樹）；94 ⚠️ |
-| BST | 3 | ⚠️✅ | 2d | **weak** | 230 Kth ⚠️；歷史 LCA 沒用 BST 性質 O(h) |
+| BST | 4 | ✅⚠️ | 2d | **weak** | 235 LCA SR ⚠️（6/11：開場又用通用 BT O(n)、iterative O(1) 仍需引導——4/20 同模式重演；自選 root==p 殺手測資質高）；230 Kth ⚠️ |
 | Backtracking | 12+ | ✅✅ | — | proficient | subsets/permutations/combinations 全覆蓋 |
 | Graph BFS/DFS | 16+ | ✅⚠️ | 2d | **weak** | 210 Course Schedule II ⚠️（DFS 3-color cycle detection 首次，補 ANALYSIS P1 #7 gap；思路 4 段大進步但 code 加 in-degree 機關致不相連環漏判 + test 紀律連 4 次未加 regression）；863 ✅ Tree→Graph BFS；127 首次 Hard BFS ⚠️ |
 | Union Find | 4 | ⚠️⚠️ | 2d | **weak** | 684 ⚠️ **首次 find+union 兩個 canonical、零 547/721 bug**（template 肌肉記憶大進步、自己抓到 find 壓縮盲點改 canonical）但仍需概念 nudge（exactly-one→early return / 複雜度 O(n·α) / invariant 循環）；721 ⚠️（斷鏈）；547 SR ⚠️（template 3 bug）。題數 4 + 近 2 題 ⚠️⚠️ → 仍 weak，但 **code 品質本次達標**（弱點已從「template bug」上移到「思路/優化精準度」）|
