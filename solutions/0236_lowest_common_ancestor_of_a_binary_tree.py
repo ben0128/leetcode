@@ -1,15 +1,51 @@
 """
 LeetCode 236. Lowest Common Ancestor of a Binary Tree
 Difficulty: Medium
-Tags: Tree, DFS, Recursion, Post-order
+Tags: Tree
 URL: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
 
+Problem:
+    Given a binary tree, find the lowest common ancestor (LCA) of two given
+    nodes in the tree.
+
+    The lowest common ancestor is defined between two nodes p and q as the
+    lowest node in the tree that has both p and q as descendants (where we
+    allow a node to be a descendant of itself).
+
+    Example 1:
+        Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+        Output: 3
+        Explanation: The LCA of nodes 5 and 1 is 3.
+
+    Example 2:
+        Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+        Output: 5
+        Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a
+                     descendant of itself according to the LCA definition.
+
+    Example 3:
+        Input: root = [1,2], p = 1, q = 2
+        Output: 1
+
+    Constraints:
+        - The number of nodes in the tree is in the range [2, 10^5].
+        - -10^9 <= Node.val <= 10^9
+        - All Node.val are unique.
+        - p != q
+        - p and q will exist in the tree.
+
 思路：
-    {TODO: post-order recursion，base case + 左右子樹回報 + 決策}
+    這題是 Binary Tree，所以沒有辦法透過 Binary Search Tree 的特色加速查詢。
+
+    主要邏輯如下：
+    1. 如果當前的節點就等於 p 或 q 的話，就直接回傳。
+    2. 如果左右兩條子樹都有回報的話，就直接回傳當前的 root。
+    3. 如果只有回傳一邊，我就回傳那一邊就好。
+    4. 空節點就回傳none
 
 複雜度：
-    Time: O(n) n = 節點數
-    Space: O(h) h = 樹深
+    Time: O(n) 最差全部走一便
+    Space: O(h) h=樹高, 最差 O(n)
 """
 
 from typing import Optional
@@ -23,22 +59,22 @@ class TreeNode:
 
 
 class Solution:
-    def lowestCommonAncestor(
-        self, root: "TreeNode", p: "TreeNode", q: "TreeNode"
-    ) -> "TreeNode":
-        def postorder(node):
-            if node is None or node == p or node == q:
-                return node
+    def lowestCommonAncestor(self, root: "TreeNode", p: "TreeNode", q: "TreeNode") -> "TreeNode":
+        def dfs(n):
+            if not n:
+                return None
             
-            resL = postorder(node.left)
-            resR = postorder(node.right)
+            if p == n or q == n:
+                return n
+            
+            resL = dfs(n.left)
+            resR = dfs(n.right)
             if resL and resR:
-                return node
-
-            return resR or resL
-
-        return postorder(root)
-
+                return n
+            return resL if resL else resR
+    
+        return dfs(root)
+        
 
 
 def build_tree_from_level(values):
@@ -77,9 +113,16 @@ if __name__ == "__main__":
     p, q = find(root, 5), find(root, 4)
     assert s.lowestCommonAncestor(root, p, q).val == 5, "Case 2 (ancestor is p)"
 
+    p, q = find(root, 6), find(root, 0)
+    assert s.lowestCommonAncestor(root, p, q).val == 3, "Case 4 "
     # Example 3: minimal tree [1,2], p=1, q=2 → LCA=1
     root = build_tree_from_level([1, 2])
     p, q = find(root, 1), find(root, 2)
     assert s.lowestCommonAncestor(root, p, q).val == 1, "Case 3 (two-node)"
 
     print("All tests passed!")
+
+    #      3
+    #    5   1
+    #   6 2 0 8
+    #  NN74
