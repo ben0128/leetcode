@@ -194,7 +194,7 @@
 | 2 | 64. Minimum Path Sum (SR) | ⚠️ | ~22 min wall | **Pass 升 7d**。4/18「寫得出講不出」全收——invariant 狀態版 / dp 定義 / 邊界 / in-place 安全 / 1D dp[j] 對應全口述達標。label ⚠️ 僅因事前 gate 兩次講不出失誤面 |
 | 3 | 236. LCA of Binary Tree (SR) | ⚠️ | ~12 min | **Pass 升 7d**。4/18 漏右遞迴 bug 未復發、自加 case 4 精準守舊傷口、複雜度主動精準、post-order why + FU 方向對。⚠️：clarifying 問低價值 / 思路漏 base case / O(1) sign-marking 忘 val 範圍 |
 | 4 | 162. Find Peak Element (SR) | ⚠️ | ~10 min | **Pass 升 7d**。4/25 兩痛點收掉——invariant「保證」兩結局窮舉 + Template by rule（找位置+保證存在→A）；equality 殺手 FU 獨立答對。⚠️：clarifying precision（全 unique→相鄰不等）/ test 多解 hardcode |
-| 5 | 127. Word Ladder (SR) | ⚠️ | ~18 min | **Pass 升 7d**。4/21 兩痛點收掉——零提示自到 Graph+BFS、Time 主動 O(M·N²) 含建字串項。⚠️：Space 又犯同盲點 O(M)→O(M·N) / 思路初版空白 / count+1 理由初版湊 / **bidirectional BFS follow-up 跳過（4/21 也錯，連兩次未補）**|
+| 5 | 127. Word Ladder (SR) | ⚠️ | ~18 min | **Pass 升 7d**。4/21 兩痛點收掉——零提示自到 Graph+BFS、Time 主動 O(M·N²) 含建字串項。⚠️：Space 又犯同盲點 O(M)→O(M·N) / 思路初版空白 / count+1 理由初版湊 / bidirectional BFS follow-up 初版想跳過、提示後**補做答對核心**（擴展較小邊界=4/21 漏點，記憶體更少修正 4/21），但 why（量化 + 挑小邊理由）仍需 push |
 
 **整體觀察：**
 - **5 題全 ⚠️ label，但 4/5 升階（2d → 7d）**——這正是 SR「升階看 outcome 不看 label」設計的體現：核心解時間內寫對就升，⚠️ 只記重做要點。這份 burndown 真的把長期卡 2d 的老題往前推了，retention 比帳面分數好很多。
@@ -202,10 +202,10 @@
 - **複雜度主動性大進步**：#64 / #162 / #127 的 Time 都主動講對，不需追問（對比早期 plan 的「複雜度漏項」root cause）。**但 #127 暴露新盲點**：「存/建一個字串成本 O(N) 非 O(1)」——Time 記得算、Space 又忘（O(M) 應 O(M·N)）。
 - **test 紀律延續 mock #01 的進步**：#236 case 4（守舊 bug）、#162 自抓 hardcode 脆弱、#127 case 6 正確，三題都主動加 test 且品質可。**但「加 test 時口述打哪個失敗點」仍需 push**——事前 gate 只做到一半。
 - **共通 root cause（壓力下鬆動）**：思路-code 對齊（#235 / #236 漏 base case / #127 思路空白）、口述精準度（#127 count+1 初版湊理由、#162 template 背對應表）、clarifying 精準度（#236 / #162 問的不是改變解法的那個保證）。這些都是「會寫、講不夠精準」，不是不會。
-- **follow-up 軌跡分歧**：#162 equality 殺手獨立答對（4/25 是要 trace 才懂）；但 #127 bidirectional BFS **直接跳過**，與 4/21 同樣未過關。
+- **follow-up 軌跡分歧**：#162 equality 殺手獨立答對（4/25 是要 trace 才懂）；#127 bidirectional BFS 初版想跳過、提示後**補做且答對核心**（「擴展較小的當前層邊界」=4/21 真正漏點、記憶體更少修正 4/21「更多」），但 why（快的量化 / 挑小邊理由）仍停在直覺版需 push。
 
 **下次建議加強：**
-- **🔴 #127 bidirectional BFS 補做**（下次 SR 第一順位）：why 快（單向 b^d → 雙向 2·b^(d/2)）、**每步展開較小 frontier**、記憶體更少非更多。連兩次未過。
+- **#127 bidirectional BFS 已補做（核心對）**：下次 SR 把 why 從直覺版升級到量化版——快（單向 `b^d` → 雙向 `2·b^(d/2)`，指數砍半≈開根號）、**每步展開較小的當前層邊界**（避免單邊指數爆炸）、記憶體更少。開口直接給，不要停在「可能性變少」。
 - **🔴 #235 視同 chronic**：下次 burndown 必選，開口第一句就要是「BST ordering 下沉 + iterative O(1)」，再需引導即 Fail 重置。
 - **複雜度 Space 也要套「字串/物件佔多少」**：不只 Time。#127 的 O(M·N) 盲點。
 - **事前 test gate 補完整**：加 test 的同時**口述它打哪個失敗點**（目前只做到「有加」）。
