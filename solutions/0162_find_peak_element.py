@@ -1,7 +1,7 @@
 """
 LeetCode 162. Find Peak Element
 Difficulty: Medium
-Tags: Array, Binary Search
+Tags: Array
 URL: https://leetcode.com/problems/find-peak-element/
 
 Problem:
@@ -35,13 +35,12 @@ Problem:
         - nums[i] != nums[i + 1] for all valid i.
 
 思路：
-    constraint 保證相鄰不相等 → 比較 nums[mid] 與 nums[mid+1]：
-    - 升（mid < mid+1）：右半 [mid+1, r] 必有 peak（最差情況右端就是 peak）→ l = mid+1
-    - 降（mid > mid+1）：左半 [l, mid] 必有 peak（mid 自己可能就是）→ r = mid
-    每次保留的半邊都仍包含 peak，l == r 時即為答案。
+    因為題目確保一定會有 peak，所以可以用二分法（Binary Search）。
+
+當發現第 M 格小於第 M+1 格的時候，就代表 peak 會在右側，所以這時候可以把 L 移到 M+1 的位置；反之，則代表 peak 可能出現在左側，所以把 R 移到 M 的地方。
 
 複雜度：
-    Time: O(log(n)) n = nums長度
+    Time: O(log(n))
     Space: O(1)
 """
 
@@ -53,13 +52,13 @@ class Solution:
         l, r = 0, len(nums)-1
 
         while l < r:
-            mid = l + (r-l) // 2
-            if nums[mid] < nums[mid+1]:
-                l = mid+1
-            elif nums[mid] > nums[mid+1]:
-                r = mid
+            m = l + (r-l)//2
+            if nums[m] < nums[m+1]:
+                l = m+1
+            else:
+                r = m
         return l
-                
+
 
 if __name__ == "__main__":
     s = Solution()
@@ -73,4 +72,5 @@ if __name__ == "__main__":
     assert s.findPeakElement([1, 2, 3, 4, 5]) == 4, "Edge: strictly increasing"
     # Edge case: strictly decreasing (peak at start)
     assert s.findPeakElement([5, 4, 3, 2, 1]) == 0, "Edge: strictly decreasing"
+    assert s.findPeakElement([3, 1, 2]) in (0, 2), "Edge: peak appear both side"
     print("All tests passed!")
