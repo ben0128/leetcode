@@ -1,7 +1,7 @@
 """
 LeetCode 127. Word Ladder
 Difficulty: Hard
-Tags: Graph, BFS, Hash Table
+Tags: String
 URL: https://leetcode.com/problems/word-ladder/
 
 Problem:
@@ -38,46 +38,41 @@ Problem:
         - All words in wordList are unique.
 
 思路：
-    先透過 Dictionary 建立查詢字，方便日後查找，再使用 BFS 逐一討論，並逐層疊加。
+    我會用 Graph，並用 BFS 求最短路徑, 因為 BFS 每走一層就計一，這樣子的層數就等於答案, 又因為每個位置最多隻有 26 個字母而已，所以可以直接 for loop 26 個字母，看哪個位置當前有字。可以從兩邊分別做 BFS                                              
+  去做查找，這樣子的空間複雜度和時間複雜度會更小。 
+    當字串入 queue 的時候，就要順便做 mark，避免重複添加。
 
 複雜度：
-    Time: O(m*(n^2))
-    Space: O(m*n) m = wordList長度, n = 單個字串長 可以產出n種wildWord
+    m = len(wordList), n = len(beginWord)
+    Time: O(len(wordList) * 10 * 26 * 10)
+    Space: O(m*n)
 """
 from typing import List
-from collections import defaultdict, deque
+from collections import deque
 
 
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        if endWord not in wordList:
-            return 0
-        
-        wordSet = defaultdict(list)
-        for word in wordList:
-            for i in range(len(word)):
-                wordSet[word[:i] + '*' + word[i+1:]].append(word)
-
-        count = 1
         tmp = deque([beginWord])
-        visited = set()
-        
+        visited = set([beginWord])
+        wordSet = set(wordList)
+        n = len(beginWord)
+        count = 0
         while tmp:
-            n = len(tmp)
-            for _ in range(n):
-                popWord = tmp.popleft()
-                if popWord == endWord:
-                    return count
-                for i, c in enumerate(popWord):
-                    wild = popWord[:i] + '*' + popWord[i+1:]
-                    
-                    for candi in wordSet[wild]:
-                        if candi in visited:
-                            continue
-                        visited.add(candi)
-                        tmp.append(candi)
+            m = len(tmp)
             count += 1
+            for k in range(m):
+                popWord = tmp.popleft()
+                for i in range(n): # 最多10
+                    for char in 'abcdefghijklmnopqrstuvwxyz': # 26 種
+                        newWord = popWord[:i]+char+popWord[i+1:] # 最差就是 分割長度為10的word 
+                        if newWord in wordSet and newWord not in visited:
+                            visited.add(newWord)
+                            if newWord == endWord:
+                                return count + 1
+                            tmp.append(newWord)
         return 0
+
 
 
 if __name__ == "__main__":
@@ -97,5 +92,6 @@ if __name__ == "__main__":
 
     # Case 5: 較大範例確認
     assert s.ladderLength("hot", "dog", ["hot", "dog", "dot"]) == 3, "Case 5"
-
+    # Case 6: 兩條路可以走
+    assert s.ladderLength("hot", "ooo", ["oot", "hoo", "ooo"]) == 3, "two row can arrive endList"
     print("All tests passed!")

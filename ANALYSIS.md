@@ -78,7 +78,7 @@
 | Trees (general) | 19+ | ⚠️⚠️ | 7d | **weak** | 236 LCA SR ⚠️ **Pass 升 7d**（6/13：4/18 漏右遞迴 bug 未復發、複雜度主動精準、post-order why + FU 方向對；⚠️ 因 clarifying 問低價值 + 思路漏 base case + O(1) sign-marking 忘 val 範圍）；94 ⚠️ |
 | BST | 4 | ✅⚠️ | 2d | **weak** | 235 LCA SR ⚠️（6/11：開場又用通用 BT O(n)、iterative O(1) 仍需引導——4/20 同模式重演；自選 root==p 殺手測資質高）；230 Kth ⚠️ |
 | Backtracking | 12+ | ✅✅ | — | proficient | subsets/permutations/combinations 全覆蓋 |
-| Graph BFS/DFS | 16+ | ✅⚠️ | 2d | **weak** | 210 Course Schedule II ⚠️（DFS 3-color cycle detection 首次，補 ANALYSIS P1 #7 gap；思路 4 段大進步但 code 加 in-degree 機關致不相連環漏判 + test 紀律連 4 次未加 regression）；863 ✅ Tree→Graph BFS；127 首次 Hard BFS ⚠️ |
+| Graph BFS/DFS | 16+ | ⚠️⚠️ | 7d | **weak** | 127 Word Ladder SR ⚠️ **Pass 升 7d**（6/14：4/21 兩痛點收掉——零提示自到 Graph+BFS、Time 主動 O(M·N²) 含建字串項；⚠️ 因 Space 又犯 O(M) 同盲點 + 思路初版空白 + bidirectional BFS follow-up 跳過，4/21 也錯連兩次未補）；210 Course Schedule II ⚠️（DFS 3-color cycle 首次，code 加 in-degree 機關致不相連環漏判 + test 紀律連 4 次未加）；863 ✅ Tree→Graph BFS |
 | Union Find | 4 | ⚠️⚠️ | 2d | **weak** | 684 ⚠️ **首次 find+union 兩個 canonical、零 547/721 bug**（template 肌肉記憶大進步、自己抓到 find 壓縮盲點改 canonical）但仍需概念 nudge（exactly-one→early return / 複雜度 O(n·α) / invariant 循環）；721 ⚠️（斷鏈）；547 SR ⚠️（template 3 bug）。題數 4 + 近 2 題 ⚠️⚠️ → 仍 weak，但 **code 品質本次達標**（弱點已從「template bug」上移到「思路/優化精準度」）|
 | DP (1D) | 6 | ⚠️— | 2d | **weak** | house-robber 8 次；1235 weighted interval scheduling ⚠️（DP+BS hybrid，dp 偏移 1 沒貫徹） |
 | DP (2D) | 3 | ⚠️⚠️ | 7d | **weak** | 64 SR **Pass 升 7d**（6/11：invariant/dp 定義/in-place 安全/1D dp[j] 對應口述全達標——4/18「寫得出講不出」收掉；label ⚠️ 僅因事前 gate 講不出失誤面）；97 ⚠️ 邊界需引導 |
@@ -183,7 +183,34 @@
 
 > 每完成一份 5 題讀書計畫後，紀錄在此。用 `/study` 生成新計畫。
 
-> ⚠️ Plan #5、#6 的摘要尚未回填到此 section（計畫檔在 `study/`，逐題結果在 `review/schedule.md`）。下次有空可補。
+> ⚠️ Plan #5、#6、#8 的摘要尚未回填到此 section（計畫檔在 `study/`，逐題結果在 `review/schedule.md`）。下次有空可補。
+
+### Plan #9 — 2026-06-09 ~ 2026-06-14（SR-burndown）
+主題重點：清最久未複習的 backlog（overdue 43–54 天），橫跨 BST / 2D DP / Tree / Binary Search / Graph-BFS。mock #01 後第一次 practice，驗證 test 紀律在無人 push 下是否成立。
+
+| # | 題目 | 結果 | 花費時間 | 筆記 |
+|---|------|------|----------|------|
+| 1 | 235. LCA of BST (SR) | ⚠️ | ~52 min wall | **唯一沒升階（維持 2d）**。開場又用通用 BT O(n)、BST ordering + iterative O(1) 均需引導——**4/20 同模式第三次重演**。自選殺手測資 root==p 質高。done 紀律弱（思路-code 不對齊、死 code 兩度未刪）|
+| 2 | 64. Minimum Path Sum (SR) | ⚠️ | ~22 min wall | **Pass 升 7d**。4/18「寫得出講不出」全收——invariant 狀態版 / dp 定義 / 邊界 / in-place 安全 / 1D dp[j] 對應全口述達標。label ⚠️ 僅因事前 gate 兩次講不出失誤面 |
+| 3 | 236. LCA of Binary Tree (SR) | ⚠️ | ~12 min | **Pass 升 7d**。4/18 漏右遞迴 bug 未復發、自加 case 4 精準守舊傷口、複雜度主動精準、post-order why + FU 方向對。⚠️：clarifying 問低價值 / 思路漏 base case / O(1) sign-marking 忘 val 範圍 |
+| 4 | 162. Find Peak Element (SR) | ⚠️ | ~10 min | **Pass 升 7d**。4/25 兩痛點收掉——invariant「保證」兩結局窮舉 + Template by rule（找位置+保證存在→A）；equality 殺手 FU 獨立答對。⚠️：clarifying precision（全 unique→相鄰不等）/ test 多解 hardcode |
+| 5 | 127. Word Ladder (SR) | ⚠️ | ~18 min | **Pass 升 7d**。4/21 兩痛點收掉——零提示自到 Graph+BFS、Time 主動 O(M·N²) 含建字串項。⚠️：Space 又犯同盲點 O(M)→O(M·N) / 思路初版空白 / count+1 理由初版湊 / **bidirectional BFS follow-up 跳過（4/21 也錯，連兩次未補）**|
+
+**整體觀察：**
+- **5 題全 ⚠️ label，但 4/5 升階（2d → 7d）**——這正是 SR「升階看 outcome 不看 label」設計的體現：核心解時間內寫對就升，⚠️ 只記重做要點。這份 burndown 真的把長期卡 2d 的老題往前推了，retention 比帳面分數好很多。
+- **唯一沒升的 #235** 是真問題：BST ordering + iterative O(1) **連三次（4/20、6/11、本次）都需引導**，已是 chronic。下次再犯應視同 Fail 重置 + 當 burndown 必選。
+- **複雜度主動性大進步**：#64 / #162 / #127 的 Time 都主動講對，不需追問（對比早期 plan 的「複雜度漏項」root cause）。**但 #127 暴露新盲點**：「存/建一個字串成本 O(N) 非 O(1)」——Time 記得算、Space 又忘（O(M) 應 O(M·N)）。
+- **test 紀律延續 mock #01 的進步**：#236 case 4（守舊 bug）、#162 自抓 hardcode 脆弱、#127 case 6 正確，三題都主動加 test 且品質可。**但「加 test 時口述打哪個失敗點」仍需 push**——事前 gate 只做到一半。
+- **共通 root cause（壓力下鬆動）**：思路-code 對齊（#235 / #236 漏 base case / #127 思路空白）、口述精準度（#127 count+1 初版湊理由、#162 template 背對應表）、clarifying 精準度（#236 / #162 問的不是改變解法的那個保證）。這些都是「會寫、講不夠精準」，不是不會。
+- **follow-up 軌跡分歧**：#162 equality 殺手獨立答對（4/25 是要 trace 才懂）；但 #127 bidirectional BFS **直接跳過**，與 4/21 同樣未過關。
+
+**下次建議加強：**
+- **🔴 #127 bidirectional BFS 補做**（下次 SR 第一順位）：why 快（單向 b^d → 雙向 2·b^(d/2)）、**每步展開較小 frontier**、記憶體更少非更多。連兩次未過。
+- **🔴 #235 視同 chronic**：下次 burndown 必選，開口第一句就要是「BST ordering 下沉 + iterative O(1)」，再需引導即 Fail 重置。
+- **複雜度 Space 也要套「字串/物件佔多少」**：不只 Time。#127 的 O(M·N) 盲點。
+- **事前 test gate 補完整**：加 test 的同時**口述它打哪個失敗點**（目前只做到「有加」）。
+- **下一份回正常結構**（不可連續 2 份 burndown）：2 weak + review 槽（依 backlog 自適應）+ Google 校準 + wildcard。但 backlog 仍大（session 起始 33 due），review 槽會吃較多。
+- mock cadence：mock #01（6/09）後已完成 1 份計畫；距下次「≥ 2 份計畫」門檻還差 1 份，下下次 /study 需留意。
 
 ### Plan #7 — 2026-05-24 ~ 2026-05-30
 主題重點：Sliding Window 鞏固、Hash+Prefix Sum 鞏固、DP 2D SR（39 天 overdue）、DFS Cycle Detection gap、Heap+LL Hard
