@@ -53,6 +53,8 @@
 
 | 986 | Interval List Intersections | M | Array / Intervals / Two Pointers | 2026-06-09 | ⚠️ | 2d | 2026-06-11 | **mock #01（首場限時 mock）**。雙指針 max/min + advance-smaller-end 一次寫對、乾淨最優、O(m+n)。**初版 merge 汙染**（帶入 9 天前 #56「相鄰就合併」邏輯）→ 一個 nudge 自修「拆兩組」恢復快。**🔴 test 主動性缺口（無人 push 版）**：說「done」時未驗證、hand-trace 與加 test 皆被 push 才做；**但自加 case `[[1,2],[3,4]],[[2,3],[4,6]]→[[2,2],[3,3],[4,4]]` 品質極高**（觸碰端點單點交集，正中死穴，vs Plan #7/#8 拒加 test 是真實進步）。follow-up：k 組 O(N·k) 被 push 後自推、space aux/output 被問才分。SR 重做要點：(1) 寫前口述**事前 test gate**「觸碰端點 / 完全不重疊 / 一個大區間蓋對面多個」(2) space 開口分 aux O(1) vs 含 output O(m+n) (3) clarify 主動問「單點/觸碰端點算不算交集」(4) k 組 follow-up 開口直接 O(N·k) + 提 heap 降 O(N log k) |
 
+| 621 | Task Scheduler | M | Heap / Greedy-Math | 2026-06-16 | ⚠️ | 2d | 2026-06-18 | Plan #10 #2。**首次**。兩種解法都討論到（plan 目標達成）。**heap 解**：greedy「挑最頻繁的可用任務」方向自己抓到，但初版結構打架（把 lastIdx 塞進 freq-heap、pop-check-pushback）→ 助教給「heap 只裝可用 + FIFO queue 裝冷卻」兩結構 insight。**math 公式（最優 O(L)/O(1)）需多次概念 nudge**：初版公式 `(fmax-1)*n+fmax`（=只 +1 收尾）**漏 countOfMax** → Example 1（A×3,B×3）反例逼出 `+c`；**漏 `max(..., len(tasks))`** 溢出情況 → Example 2 反例逼出。**why-greedy 偏淺**（「先放最頻繁越好」是結論非理由）→ 助教補「最頻繁=瓶頸鎖死下限、greedy 達標 ⟹ 下限=可達=最優」。最終 code 乾淨正確、tests 全過。**思路初版留 TODO**（forcing function miss），點名後補上但 line 42 留舊公式草稿片段。follow-up「回傳實際序列」答對（需 heap 模擬，公式給不了序列）。維持 2d。SR 重做要點：(1) 公式一次到位 `max(len(tasks), (fmax-1)*(n+1)+c)`，c=並列 fmax 的種類數 (2) why-greedy 開口直接講「瓶頸鎖死下限 + greedy 達標」(3) heap 解開口直接「heap 裝可用 + deque 裝冷卻」兩結構，不要 pop-check-pushback (4) 思路寫前就填檔案、4 段 (5) 先講 heap O(L·log k) 再講 math O(L) 對比 |
+
 ## Mastered（通過 32d 複習後結業）
 
 | # | 題目 | 結業日期 | 總複習次數 |
