@@ -1,7 +1,7 @@
 """
 LeetCode 227. Basic Calculator II
 Difficulty: Medium
-Tags: Math, String, Stack
+Tags: String, Math
 URL: https://leetcode.com/problems/basic-calculator-ii/
 
 Problem:
@@ -38,70 +38,71 @@ Problem:
         - The answer is guaranteed to fit in a 32-bit integer.
 
 思路：
-    res = 已經不會變的總和就放入這邊
-    lastNum = 有可能會因為後續數字所改變的部分
-    prev_op = 前一個op,並非當前的op
+    會先 init 三個變數：
 
-裡面值得注意的是：
-1. 減號：需要先補一個負號給它（轉成負數），方便後續統一用加法做處理。
-2. 除號：則是要注意運算規則 -3 // 2 = -2（floor，往 -∞）                                                                                                                                
-  - int(-3 / 2) = -1（truncate toward zero） 。
+1. result：最後的歸檔區
+2. lastNum
+3. num
+
+lastNum 和 num 這兩個數字會在中間互相影響，所以要記錄他們中間的運算符號是什麼，因此還會有一個 prev_op 去記錄最後出現的運算符
+　當出現加號或減號時，就直接將 last number 歸檔入 result，然後將 last number 令為 num，並且要注意正負。
+
+而如果是出現乘除時，last number 就要吸收 num
 
 複雜度：
-    Time: O(n) n = len(s)
+    Time: O(n)
     Space: O(1)
 """
 
+
 class Solution:
     def calculate(self, s: str) -> int:
-        lastNum = 0
-        res = 0
+        res, lastNum, num = 0, 0, 0
         prev_op = '+'
-        num = 0
-        def applyOperators(value):
-            nonlocal lastNum, res
-            if prev_op == '+':
-                res += lastNum
-                lastNum = value
-            elif prev_op == '-':
-                res += lastNum
-                lastNum = -value
-            elif prev_op == '*':
-                lastNum *= value
-            elif prev_op == '/':
-                lastNum = int(lastNum / value)
-
+        ops = {
+            '+': lambda a, b: a+b,
+            '-': lambda a, b: a-b,
+            '*': lambda a, b: a*b,
+            '/': lambda a, b: int(a/b)
+        }
+        
         for c in s:
-            if c in '+-*/':
-                applyOperators(num)
-                num = 0
+            if c == ' ':
+                continue
+            elif c in '0123456789':
+                num = num*10 + int(c)
+            else:
+                if prev_op == '+':
+                    res += lastNum
+                    lastNum = num
+                elif prev_op == '-':
+                    res += lastNum
+                    lastNum = -num
+                elif prev_op == '*':
+                    lastNum *= num
+                else:
+                    lastNum = int(lastNum/num)
                 prev_op = c
-            elif c.isdigit():
-                num = num * 10 + int(c)
-        applyOperators(num)
-        return res+lastNum
+                num = 0
+
+        return res + ops[prev_op](lastNum,num)
+                
 
 
 if __name__ == "__main__":
     s = Solution()
 
-    # Example 1: mix of + and *
     assert s.calculate("3+2*2") == 7, "Case 1"
-
-    # Example 2: division truncates toward zero
     assert s.calculate(" 3/2 ") == 1, "Case 2"
-
-    # Example 3: order of operations with division
     assert s.calculate(" 3+5 / 2 ") == 5, "Case 3"
 
-    # Edge: single number with whitespace
+    # cap-point history: trailing num must flush at end (1-1+1)
+    assert s.calculate("1-1+1") == 1, "Case 4: trailing flush"
+
+    # truncate toward zero on negative dividend: int(-6/4) == -1, NOT -6//4 == -2
+    assert s.calculate("1-6/4") == 0, "Case 5: truncate toward zero"
+
+    # edge: single number with whitespace
     assert s.calculate("   42  ") == 42, "Edge: single number"
-
-    # Edge: multiple precedence interactions
-    assert s.calculate("14-3/2") == 13, "Edge: 14 - (3/2) = 14 - 1 = 13"
-
-    # Edge: chained */ with division truncation toward zero
-    assert s.calculate("1*2-3/4+5*6-7*8+9/10") == -24, "Edge: chained ops"
-
-    assert s.calculate("1-1+1") == 1, "Case 7"
+    assert s.calculate("10-6-3") == 1, "Case 6: negative number"
     print("All tests passed!")
