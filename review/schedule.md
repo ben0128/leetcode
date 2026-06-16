@@ -55,6 +55,8 @@
 
 | 621 | Task Scheduler | M | Heap / Greedy-Math | 2026-06-16 | ⚠️ | 2d | 2026-06-18 | Plan #10 #2。**首次**。兩種解法都討論到（plan 目標達成）。**heap 解**：greedy「挑最頻繁的可用任務」方向自己抓到，但初版結構打架（把 lastIdx 塞進 freq-heap、pop-check-pushback）→ 助教給「heap 只裝可用 + FIFO queue 裝冷卻」兩結構 insight。**math 公式（最優 O(L)/O(1)）需多次概念 nudge**：初版公式 `(fmax-1)*n+fmax`（=只 +1 收尾）**漏 countOfMax** → Example 1（A×3,B×3）反例逼出 `+c`；**漏 `max(..., len(tasks))`** 溢出情況 → Example 2 反例逼出。**why-greedy 偏淺**（「先放最頻繁越好」是結論非理由）→ 助教補「最頻繁=瓶頸鎖死下限、greedy 達標 ⟹ 下限=可達=最優」。最終 code 乾淨正確、tests 全過。**思路初版留 TODO**（forcing function miss），點名後補上但 line 42 留舊公式草稿片段。follow-up「回傳實際序列」答對（需 heap 模擬，公式給不了序列）。維持 2d。SR 重做要點：(1) 公式一次到位 `max(len(tasks), (fmax-1)*(n+1)+c)`，c=並列 fmax 的種類數 (2) why-greedy 開口直接講「瓶頸鎖死下限 + greedy 達標」(3) heap 解開口直接「heap 裝可用 + deque 裝冷卻」兩結構，不要 pop-check-pushback (4) 思路寫前就填檔案、4 段 (5) 先講 heap O(L·log k) 再講 math O(L) 對比 |
 
+| 518 | Coin Change II | M | DP / Unbounded Knapsack (combinations) | 2026-06-17 | ✅ | 2d | 2026-06-19 | Plan #10 #4。**首次（Knapsack combinations 變體，ANALYSIS 待做）**。**#322 彩蛋成功遷移**：loop order 外 coins/內 amount = 組合，自己選對且**講得出 WHY**（「硬幣固定順序一種種加進來 → 每組合只以排好序的唯一順序被建 → (1,2)/(2,1) 收斂」+ 正確反例 `dp[3]+=dp[2]`、`dp[3]+=dp[1]` 會數兩次=排列）。recurrence `dp[i]+=dp[i-coin]`、base `dp[0]=1`（空組合）、複雜度 O(coins×amount)/O(amount) 全自主。code 一次過、canonical（`range(coin, amount+1)` 避負 index、`return dp[-1]`）。follow-up 數排列 → 內外迴圈對調，一句命中。**唯一缺**：寫前 test gate 沒主動口述失敗點（測資我預填）。SR 重做要點：(1) 開口 4 段思路含 loop-order WHY（機制非「規則就這樣」）(2) 322 min-coins vs 518 count-combos vs 排列版三者 loop/recurrence 差異要能對比 (3) 寫前自己挑 combos-not-perms case 並講為何 |
+
 ## Mastered（通過 32d 複習後結業）
 
 | # | 題目 | 結業日期 | 總複習次數 |
