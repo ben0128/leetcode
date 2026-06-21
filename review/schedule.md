@@ -57,6 +57,8 @@
 
 | 518 | Coin Change II | M | DP / Unbounded Knapsack (combinations) | 2026-06-17 | ✅ | 2d | 2026-06-19 | Plan #10 #4。**首次（Knapsack combinations 變體，ANALYSIS 待做）**。**#322 彩蛋成功遷移**：loop order 外 coins/內 amount = 組合，自己選對且**講得出 WHY**（「硬幣固定順序一種種加進來 → 每組合只以排好序的唯一順序被建 → (1,2)/(2,1) 收斂」+ 正確反例 `dp[3]+=dp[2]`、`dp[3]+=dp[1]` 會數兩次=排列）。recurrence `dp[i]+=dp[i-coin]`、base `dp[0]=1`（空組合）、複雜度 O(coins×amount)/O(amount) 全自主。code 一次過、canonical（`range(coin, amount+1)` 避負 index、`return dp[-1]`）。follow-up 數排列 → 內外迴圈對調，一句命中。**唯一缺**：寫前 test gate 沒主動口述失敗點（測資我預填）。SR 重做要點：(1) 開口 4 段思路含 loop-order WHY（機制非「規則就這樣」）(2) 322 min-coins vs 518 count-combos vs 排列版三者 loop/recurrence 差異要能對比 (3) 寫前自己挑 combos-not-perms case 並講為何 |
 
+| 68 | Text Justification | H | String / Greedy | 2026-06-21 | ⚠️ | 2d | 2026-06-23 | Plan #10 #5。**Google 🔥🔥🔥 String、Hard 新題**。帶會跑但 Case 1 fail 的成品來 debug+重構（非完整限時練習）。**Bug**：空格分配三元式優先序錯 `(baseSpace+' ' if needOneMore>0 else '')`——needOneMore 歸零後 `else ''` 把整個 baseSpace 丟掉、字黏一起；助教指行 + 要 trace 自己修好。**code quality 三輪**：抽 helper → 但名字接反（`_left_justify` 實做 full justify、反之亦然＝主動誤導）+ `self.ans` + `lastSpace` closure 隱性依賴 → 對調名字 + 改 return → `lastSpace` 改讀 `tmpWordLen` 仍 closure 依賴（殘留未收）。**亮點**：corner case 單字行自補；複雜度 Space 主動分 aux O(maxWidth) vs 含 output 兩者皆對（#127 盲點未犯）。SR 重做要點：(1) 每行兩模式——last line / 單字行 → left-justify、多字中間行 → full-justify，開口先講這個 case split (2) full-justify 空格分配 `base=total//gaps`、前 `total%gaps` 個 gap 各 +1（"左邊多分"）；三元式寫 `base + (' ' if extra>0 else '')` 別把 base 丟掉 (3) helper 命名要對齊行為、給定 `currList` 自洽（空格數從 currList 自己算 `sum(len)`，別讀外層 `tmpWordLen`）(4) 字串用 list + ''.join 避 O(W²)（#394 同課）(5) 思路 4 段 + 寫前事前 test gate 口述失敗點（單字行 / 最後一行 / 額外空格平均分配 / 一字滿行）|
+
 ## Mastered（通過 32d 複習後結業）
 
 | # | 題目 | 結業日期 | 總複習次數 |

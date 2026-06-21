@@ -185,6 +185,33 @@
 
 > ⚠️ Plan #5、#6、#8 的摘要尚未回填到此 section（計畫檔在 `study/`，逐題結果在 `review/schedule.md`）。下次有空可補。
 
+### Plan #10 — 2026-06-14 ~ 2026-06-21（正常結構：2 weak + 2 review + 1 Google）
+主題重點：UF / Stack-parsing 最老 SR backlog（overdue 45–46 天）、Heap 弱項、DP-Knapsack 弱項（#322 loop-order 對照）、Google 🔥🔥🔥 String 校準（edge-case + clean-code 硬題）。全程避開 Plan #9 主題。
+
+| # | 題目 | 結果 | 花費時間 | 筆記 |
+|---|------|------|----------|------|
+| 1 | 547. Number of Provinces (SR) | ✅ | ~暖身快速 | **Pass 升 7d**。UF template 一次寫對、零 4/27 卡點史 bug（find path-halving / union 先 find 兩 root / 只掃上三角）。parent 初始值口誤秒改。缺：test 失敗點口述偏淺 |
+| 2 | 621. Task Scheduler | ⚠️ | 含討論較久 | 新題、Heap 弱項。兩解都討論（heap + math）。greedy 方向自抓，但 math 公式漏 countOfMax、漏 max(,len) 需反例逼出；why-greedy 偏淺。最終 O(L)/O(1) 乾淨正確。思路初版留 TODO。SR 2d |
+| 3 | 227. Basic Calculator II (SR) | ❌ | 含 debug 較久 | **Fail 重置 2d**。需完整三變數骨架才動手（同 #235 chronic 性質）；卡點史減法 bug 再犯 `res-=lastNum`（`10-2-3`→-11）；**🔴 假 pass**（測資對稱抵銷、bug 助教抓非自抓）。修法符號綁項上 `lastNum=-num`、結算永遠 += |
+| 4 | 518. Coin Change II | ✅ | 順暢 | 新題、Knapsack combinations。**#322 彩蛋成功遷移**：loop order 外 coins/內 amount=組合，自選對且講得出 WHY + 正確反例。recurrence/base/複雜度全自主、一次過 canonical。follow-up 排列版對調迴圈一句命中。缺：test gate 沒口述失敗點。SR 2d |
+| 5 | 68. Text Justification | ⚠️ | 非限時（帶成品 debug+重構）| 新題、Google 🔥🔥🔥 Hard。帶會跑但 Case 1 fail 成品來。Bug=空格分配三元式優先序錯（needOneMore 歸零後 baseSpace 被丟）。**code quality 三輪重構**（抽 helper → 名字接反+self.ans+closure 依賴 → 殘留 closure 未收）。**亮點：複雜度 Space 主動分 aux vs output 兩者皆對——#127 盲點未犯**；單字行 corner case 自補。缺：思路 1 段、無 clarifying、無 test gate（帶成品性質）。Hard 新題 SR 納入 2d |
+
+**整體觀察：**
+- **結果 ✅⚠️❌✅⚠️**（2 ✅ + 2 ⚠️ + 1 ❌）。SR 複習 2 題：#547 升 7d、#227 Fail 重置；新題 3 題（#621 / #518 / #68）全納入 SR。
+- **#227 是本份最大警訊**：減法符號 bug **第二次**重演（首解 + 本次），且**假 pass**（對稱測資抵銷）模式與 #33 / #210 同源——「測資沒打到失敗點 → All tests passed 是假象」。根因是「心智模型講得出、翻不成 code」（同 #235 chronic），需練到不靠骨架。
+- **彩蛋/遷移成功**：#518 把 #322 記的「loop order 外 coins=組合、反之=排列」彩蛋完整遷移，講得出機制 + 反例，是跨題知識複用的正面案例。
+- **複雜度 Space 盲點這次沒犯**（#68 主動分 aux vs output 兩者皆對）——對比 Plan #9 #127 的 O(M)→O(M·N) 失誤是明確進步；但僅在「被當 forcing function 主動問」時觸發，尚未證明會自動做。
+- **code quality 深練一次**（#68）：從一坨 → 抽 helper → 修命名 / 解耦，三輪才到 production-ready。**命名接反**（helper 名字與行為相反）是新出現的反模式，比 `tmp` 模糊更糟（主動誤導）。L4 bar「production-ready、every corner case」這題練到重點，但「一次就乾淨」尚未做到。
+- **test 紀律退回半套**：#547 / #518 都「沒主動口述事前 test gate 打哪個失敗點」，#68 因帶成品來連 gate 都沒走。對比 mock #01 / Plan #9 的進步本份退步——可能因 3/5 題是「複習 / 帶成品」而非從零，gate 自然鬆。
+
+**下次建議加強：**
+- **🔴 #227 減法 bug + 假 pass 是必修**：下次 SR（已 due 6/18）開口直接「符號綁項上 `lastNum=-num`、結算永遠 +=」+ 事前 gate 必含非對稱 case `10-2-3` / `10-6-3`。再犯視同 chronic。
+- **「心智模型→code」翻譯練習**（#227 / #235 共同 chronic）：能講不能寫，下次這兩題不給骨架、逼從零起手。
+- **複雜度 Space 主動化**：#68 證明「被問就會對」，目標是不問也主動分 aux vs output（延續 Plan #9 建議）。
+- **事前 test gate 回正軌**：#547 / #518 / #68 都沒主動口述失敗點，下次從零題開口就要「哪個 case 打爆我」。
+- **#68 字串用 ''.join**（#394 同課）+ helper 一次命名對齊行為，下次 String / refactor 題注意。
+- **🔴 mock cadence 觸發**：mock #01（6/09）後已完成 Plan #9 + #10 = **2 份計畫** → 下次 `/study` 預設先跑一場 45 min `/mock` 再開新計畫（題目從已練主題抽，量壓力下體檢），學生明確說「跳過」才略過。
+
 ### Plan #9 — 2026-06-09 ~ 2026-06-14（SR-burndown）
 主題重點：清最久未複習的 backlog（overdue 43–54 天），橫跨 BST / 2D DP / Tree / Binary Search / Graph-BFS。mock #01 後第一次 practice，驗證 test 紀律在無人 push 下是否成立。
 
