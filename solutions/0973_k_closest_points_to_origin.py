@@ -38,26 +38,28 @@ Problem:
         Could you solve it in better than O(n log n) time?
 
 思路：
-    use max heap to find close point
+    用maxHeap 每次推入前檢查heap長度, 如果長度超過就要比較最遠點和當前candiate與原點的距離, maxHeap[0]遠的話就pop
 
 複雜度：
-    k = input number, n = points 長度
     Time: O(nlog(k))
     Space: O(k)
 """
 
 from typing import List
-from heapq import heappush, heappop
+from heapq import heappush, heappop, heappushpop
 
 class Solution:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        maxH = []
-        for i, [x,y] in enumerate(points):
-            dis = x ** 2 + y ** 2
-            heappush(maxH, (-dis, i))
-            if len(maxH) > k:
-                heappop(maxH)
-        return [points[idx] for dis, idx in maxH]
+        maxH = [] # (x**2+y**2, (x, y))
+
+        for x, y in points:
+            dis = x**2+y**2
+            if len(maxH) < k:
+                heappush(maxH, (-dis, (x, y)))
+            elif -maxH[0][0] > dis:
+                heappushpop(maxH, (-dis, (x, y)))
+        
+        return [[x, y] for _, (x, y) in maxH]
 
 
 if __name__ == "__main__":
@@ -79,4 +81,6 @@ if __name__ == "__main__":
     result4 = s.kClosest([[0, 1]], 1)
     assert result4 == [[0, 1]], f"Edge case failed: {result4}"
 
+    result5 = s.kClosest([[0, 0], [-1, 1]], 1)
+    assert result5 == [[0, 0]], f"Edge case failed: {result4}"
     print("All tests passed!")

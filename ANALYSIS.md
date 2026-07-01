@@ -85,11 +85,12 @@
 | DP (Knapsack) | 4 | ✅✅ | 2d | **developing** | **518 Coin Change II ✅（Plan #10, 6/17, 新題）**：#322 彩蛋成功遷移——loop order 外 coins/內 amount=組合，自選對且**講得出 WHY** + 正確反例，recurrence/base/複雜度全自主一次過；322 Coin Change ✅ 首次 unbounded knapsack；partition-equal-subset-sum 5 次。近 2 題 ✅✅ 脫離 weak，題數 4<5 未達 proficient |
 | Sliding Window | 2 | ✅✅ | 2d | **weak** | 3 Longest Substring ✅（Plan #7 #1，last-seen-index variant）+ 76 Min Window ✅（Hard）；題數<3 仍需鞏固（209/424 待做） |
 | Hash + Prefix Sum | 2 | ⚠️⚠️ | 2d | **weak** | 525 Contiguous Array ⚠️（Plan #7 #2，±1 transform；hashmap value=index 語意卡）+ 560 Subarray Sum K ⚠️（value=count）；題數<3 |
-| Heap | 5+ | ⚠️⚠️ | 2d | **weak** | **621 Task Scheduler ⚠️（Plan #10, 6/16, 新題）**：兩解都討論（heap + math），greedy 方向自抓但 math 公式漏 countOfMax/漏 max(,len) 需反例逼出、why-greedy 偏淺，最終 O(L)/O(1) 乾淨正確；295 SR ⚠️（漏 order rebalance 自 trace `[5,1,10]` 抓回、invariant「差2」當 state、複雜度兩處不精確）；23 Merge k Lists ⚠️（heap+LL Hard、Python comparison 坑）；973 ✅ |
+| Heap | 5+ | ⚠️⚠️ | 2d | **weak** | **621 Task Scheduler ⚠️（Plan #10, 6/16, 新題）**：兩解都討論（heap + math），greedy 方向自抓但 math 公式漏 countOfMax/漏 max(,len) 需反例逼出、why-greedy 偏淺，最終 O(L)/O(1) 乾淨正確；295 SR ⚠️（漏 order rebalance 自 trace `[5,1,10]` 抓回、invariant「差2」當 state、複雜度兩處不精確）；23 Merge k Lists ⚠️（heap+LL Hard、Python comparison 坑）；973 ✅ 首解。**973 SR-burndown 重做 ⚠️（Plan #11 #1, 7/1）**：max-heap 核心零提示＋主動用 `heappushpop` 合併 sift＋主動加 origin edge case；但 sqrt 單調性需二度追問、follow-up O(n) 揭露 **partition 機制整個沒學過**（非僅不知 quickselect 名稱），一度把 quicksort/quickselect 行為講反後自己修正對 → 新增 `notes/quickselect_partition.md` + 下方新 gap 主題 |
 | Monotonic Queue | 1 | ⚠️— | 2d | **weak** | 題數<3；239 首次接觸有 2 個實作 bug |
 | Segment Tree / BIT | 0 | — | — | **gap** | 零覆蓋 |
 | 進階 Design | 0 | — | — | **gap** | LFU / Iterator / Rate Limiter 未練 |
 | Math | 0 | — | — | **gap** | 幾乎零覆蓋 |
+| Sorting / Quickselect | 0 | — | — | **gap** | **973 follow-up 揭露（7/1）**：partition 機制完全沒學過（非僅不知 quickselect 名稱）。已建立 `notes/quickselect_partition.md`；下次 /study wildcard 槽位可排 215. Kth Largest Element 當入門題 |
 
 ### 等級判定規則
 
