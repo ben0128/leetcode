@@ -35,14 +35,11 @@ Problem:
         - p and q will exist in the BST.
 
 思路：
-    dfs to find target
-    I use an iterative approach to find the nodes. If I find that the current node's value is between p and q, I just return current node.
-
-However, if both nodes are greater or smaller than the root, I use the features of bst to change the root nodes .
+    TODO（學生自己填；中文 OK）
 
 複雜度：
-    Time: O(h) h = 樹深 最差O(n)
-    Space: O(1) 
+    Time: O(?)
+    Space: O(?)
 """
 
 
@@ -54,26 +51,21 @@ class TreeNode:
 
 class Solution:
     def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
-        curr = root
-        # let p.val > q.val
         if p.val < q.val:
             p, q = q, p
-        pval, qval = p.val, q.val
+        pv, qv = p.val, q.val
+
+        curr = root
 
         while curr:
-            currVal = curr.val
-            if qval <= currVal <= pval:
+            if pv >= curr.val >= qv:
                 return curr
-            
-            if currVal < pval:
-                curr = curr.right
-            else:
+            if curr.val > pv:
                 curr = curr.left
-            
+            else:
+                curr = curr.right
 
-
-
-
+        
 if __name__ == "__main__":
     # Helper to build tree from list
     def build_tree(vals):
@@ -105,6 +97,9 @@ if __name__ == "__main__":
 
     p4, q4 = root1, root1.left
     assert Solution().lowestCommonAncestor(root1, p4, q4).val == 6, "Edge case"
+
+    p5, q5 = root1.left, root1.right.left
+    assert Solution().lowestCommonAncestor(root1, p5, q5).val == 6, "Edge case"
     print("All tests passed!")
 
 #          6
