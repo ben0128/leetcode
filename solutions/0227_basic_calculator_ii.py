@@ -38,55 +38,47 @@ Problem:
         - The answer is guaranteed to fit in a 32-bit integer.
 
 思路：
-    會先 init 三個變數：
+     會先 init 三個變數：
 
-1. result：最後的歸檔區
-2. lastNum
-3. num
+1. res：最後的歸檔區
+2. prev
+3. curr
 
-lastNum 和 num 這兩個數字會在中間互相影響，所以要記錄他們中間的運算符號是什麼，因此還會有一個 prev_op 去記錄最後出現的運算符
-　當出現加號或減號時，就直接將 last number 歸檔入 result，然後將 last number 令為 num，並且要注意正負。
-
-而如果是出現乘除時，last number 就要吸收 num
+prev 和 curr 這兩個數字會在中間互相影響，所以要記錄他們中間的運算符號是什麼，因此還會有一個 prev_op 去記錄最後出現的運算符
+　當出現加號或減號時，就直接將 prev 歸檔入 res，然後將 prev = curr，並且要注意正負。
+而如果是出現乘除時，prev 就要吸收 curr。
+尾巴補哨兵運算符，讓最後一項走同一段歸檔，收尾即 res + prev。
 
 複雜度：
     Time: O(n)
-    Space: O(1)
+    Space: O(n) (s+'+')  可用 itertools.chain 降回 O(1)。
 """
 
 
 class Solution:
     def calculate(self, s: str) -> int:
-        res, lastNum, num = 0, 0, 0
+        res = prev = curr = 0
         prev_op = '+'
-        ops = {
-            '+': lambda a, b: a+b,
-            '-': lambda a, b: a-b,
-            '*': lambda a, b: a*b,
-            '/': lambda a, b: int(a/b)
-        }
-        
-        for c in s:
+        for c in s+'+':
             if c == ' ':
                 continue
-            elif c in '0123456789':
-                num = num*10 + int(c)
+            elif c not in '+-*/': # c is number
+                curr = curr*10 + int(c)
             else:
                 if prev_op == '+':
-                    res += lastNum
-                    lastNum = num
+                    res += prev
+                    prev = curr
                 elif prev_op == '-':
-                    res += lastNum
-                    lastNum = -num
+                    res += prev
+                    prev = -curr
                 elif prev_op == '*':
-                    lastNum *= num
+                    prev *= curr
                 else:
-                    lastNum = int(lastNum/num)
+                    prev = int(prev/curr)
+                curr = 0
                 prev_op = c
-                num = 0
 
-        return res + ops[prev_op](lastNum,num)
-                
+        return res + prev
 
 
 if __name__ == "__main__":
@@ -96,13 +88,9 @@ if __name__ == "__main__":
     assert s.calculate(" 3/2 ") == 1, "Case 2"
     assert s.calculate(" 3+5 / 2 ") == 5, "Case 3"
 
-    # cap-point history: trailing num must flush at end (1-1+1)
-    assert s.calculate("1-1+1") == 1, "Case 4: trailing flush"
-
-    # truncate toward zero on negative dividend: int(-6/4) == -1, NOT -6//4 == -2
-    assert s.calculate("1-6/4") == 0, "Case 5: truncate toward zero"
-
-    # edge: single number with whitespace
+    # Edge: single number with whitespace
     assert s.calculate("   42  ") == 42, "Edge: single number"
-    assert s.calculate("10-6-3") == 1, "Case 6: negative number"
+    assert s.calculate("1-1+1") == 1,    "trailing flush"
+    assert s.calculate("1-6/4") == 0,    "truncate toward zero"
+    assert s.calculate("10-6-3") == 1,   "非對稱減法"
     print("All tests passed!")
