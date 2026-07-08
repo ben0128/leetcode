@@ -1,7 +1,7 @@
 """
 LeetCode 721. Accounts Merge
 Difficulty: Medium
-Tags: Array, Hash Table, String, DFS, BFS, Union Find, Sorting
+Tags: Array, Hash Table, String
 URL: https://leetcode.com/problems/accounts-merge/
 
 Problem:
@@ -62,45 +62,50 @@ Problem:
         - accounts[i][j] (for j > 0) is a valid email.
 
 思路：
-    1. row index 當 UF 節點（不用 name，因為同名可能不同人）
-    2. emailToIdx[email] = row 當橋樑：掃到重複 email 就 union 兩個 row
-    3. 聚合：find 出每個 email 的 root，同 root 一組，排序後貼上名字
-    陷阱：union 要寫 roots[find(i)] = find(j)，不能寫 roots[i] = ...（會斷鏈）
+    先 init 一個 users，每個人、每個 user 都有自己的根，接著再逐一做 union。
+
+如果在過程中找到了不同的 roots，就要把子樹的 root 掛到另一個 root 上面去合併。
+最後再根據題目的要求，answer 的部分用人名當第一個元素，後續掛滿 sorted email。
+掃描時遇到看過的 email，它告訴我該跟哪一行 union
 
 複雜度：
-    n = 總共的 email 數量
-    Time: O(n log n)   # 瓶頸是排序，UF 操作近似 O(α(n))
-    Space: O(n)        # emailToIdx + roots + 輸出
+    Time: 排序主導，Σ kᵢ log kᵢ ≤ n log n
+    Space: 一開始的 inits 是 O(M)，等於 Account 數量。後續的 Email to User 是 O(K)，是 Unique Email 的數量。
 """
 
 from typing import List
 from collections import defaultdict
 
-
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
-        n = len(accounts)
-        roots = [i for i in range(n)]
-        emailToIdx = {}
-        def find(node):
-            while roots[node] != roots[roots[node]]:
-                roots[node] = roots[roots[node]]
-            return roots[node]
+        users = [i for i in range(len(accounts))]
+        m = len(users)
+        emailToUser = {}
+
+        def find(n, li):
+            while li[n] != li[li[n]]:
+                li[n] = li[li[n]]
+                n = li[n]
+            return li[n]
         
-        for i in range(n):
+        for i in range(m):
             account = accounts[i]
-            for email in account[1:]:
-                if email in emailToIdx:
-                    roots[find(i)] = find(emailToIdx[email])
-                emailToIdx[email] = roots[i]
-        
-        tmp = defaultdict(list)
-        for email, idx in emailToIdx.items():
-            rootI = find(idx)
-            tmp[rootI].append(email)
-        for v in tmp.values():
-            v.sort()
-        return [[accounts[idx][0]]+emails for idx, emails in tmp.items()]
+            for j in range(1, len(account)):
+                email = account[j]
+                if email not in emailToUser:
+                    emailToUser[email] = i
+                else:
+                    idxA = find(emailToUser[email], users)
+                    idxB = find(i, users)
+                    users[idxA] = idxB
+
+        ansMap = defaultdict(set)
+        for i in range(m):
+            currIdx = find(i, users)
+            for j in range(1, len(accounts[i])):
+                ansMap[currIdx].add(accounts[i][j])
+        return [ [accounts[i][0]]+sorted(list(emailSet)) for i, emailSet in ansMap.items()]
+
 
 
 
@@ -164,4 +169,8 @@ if __name__ == "__main__":
     edge_out = [["Solo", "solo@x.com"]]
     assert normalize(s.accountsMerge(edge_in)) == normalize(edge_out), "Edge: single account"
 
+    # Edge: two single node
+    edge_in1 = [["ac1", "ac1@x.com"], ["ac2", "ac2@x.com"]]
+    edge_out1 = [["ac1", "ac1@x.com"], ["ac2", "ac2@x.com"]]
+    assert normalize(s.accountsMerge(edge_in1)) == normalize(edge_out1), "Edge: single account"
     print("All tests passed!")
